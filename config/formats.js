@@ -306,6 +306,133 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "Spring Random",
+		section: "Random Battles (aka Randbats)",
+
+		team: 'randomSpring',
+		ruleset: ['Random (no PotD)'],
+		onBegin: function() {
+			this.setWeather('Hail');
+			delete this.weatherData.duration;
+		},
+		onBeforeMove: function(pokemon, target, move) {
+			if (pokemon.template.speciesid === 'moltres' || pokemon.template.speciesid === 'hooh' || pokemon.template.speciesid === 'groudon') {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.template.speciesid === 'zapdos' || pokemon.template.speciesid === 'kyogre' || pokemon.template.speciesid === 'tornadus' || pokemon.template.speciesid === 'tornadustherian' || pokemon.template.speciesid === 'thundurus' || pokemon.template.speciesid === 'thundurustherian') {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.template.speciesid === 'lugia' || pokemon.template.speciesid === 'rayquaza' || pokemon.template.speciesid === 'landorus' || pokemon.template.speciesid === 'landorustherian') {
+				delete this.weatherData.duration;
+			}
+		},
+		onBeforeMove: function(pokemon) {
+			if (pokemon.side.battle.turn >= 3) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 7) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 11) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 15) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 19) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 23) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 27) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 31) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 35) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 39) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 43) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 47) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 51) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 55) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 59) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 63) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 67) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 71) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 75) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 79) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 83) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 87) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 91) {
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 95) {
+				this.setWeather('Rain Dance');
+				delete this.weatherData.duration;
+			}
+			if (pokemon.side.battle.turn >= 99) {
+				this.add('-message', "Wow, this battle is taking forever.");
+				this.setWeather('Sunny Day');
+				delete this.weatherData.duration;
+			}
+		}
+	},
+	{
 		name: "Orb Random",
 		section: "Random Battles (aka Randbats)",
 
