@@ -216,6 +216,7 @@ exports.customavatars = {
 	'servineking': 'zach.gif',
 	'terbte': 'zach.gif',
 	'megaservine': 'zach.gif',
+	'tstarja': 'zach.gif',
 	'hiddenpowerflying': 'tide.png',
 	'kingchuckles': 'chuckles.gif',
 	'chucklesthegenie': 'chuckles.gif',
