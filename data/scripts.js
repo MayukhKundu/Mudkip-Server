@@ -3771,6 +3771,7 @@ exports.BattleScripts = {
 			if (template.id === 'castform') {
 				set.species = 'castform';
 				set.moves = ['weatherball', 'thunderbolt', 'icebeam', 'recover'];
+			}
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
