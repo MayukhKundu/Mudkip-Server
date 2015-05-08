@@ -3697,6 +3697,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -3712,6 +3713,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -3828,6 +3833,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -3843,6 +3849,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -3959,6 +3969,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -3974,6 +3985,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -4099,6 +4114,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -4123,6 +4139,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -4254,6 +4274,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -4269,6 +4290,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -4382,6 +4407,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
+		var lcCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -4397,6 +4423,10 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'LC':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (lcCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
