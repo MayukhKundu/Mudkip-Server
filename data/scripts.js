@@ -3677,6 +3677,135 @@ exports.BattleScripts = {
 		}
 		return pokemon;
 	},
+	randomSpringTeam: function (side) {
+		var pokemonLeft = 0;
+		var lead = 'castform';
+		var pokemon = [this.randomSet(this.getTemplate(lead), 0)];
+
+		var pokemonList = ['amoonguss', 'arceusgrass', 'bayleef', 'bellossom', 'bellsprout', 'breloom', 'budew', 'bulbasaur', 'cacnea', 'cacturne', 'carnivine', 'celebi', 'cherrim', 'cherubi', 'chesnaught', 'chespin', 'chikorita', 'cottonee', 'cradily', 'deerling', 'exeggcute', 'exeggutor', 'ferroseed', 'ferrothorn', 'foongus', 'gloom', 'gogoat', 'gourgeist', 'gourgeistlarge', 'gourgeistsmall', 'gourgeistsuper', 'grotle', 'grovyle', 'hoppip', 'ivysaur', 'jumpluff', 'leafeon', 'leavanny', 'lileep', 'lilligant', 'lombre', 'lotad', 'ludicolo', 'maractus', 'meganium', 'nuzleaf', 'oddish', 'pansage', 'paras', 'parasect', 'petilil', 'phantump', 'pumpkaboo', 'pumpkaboolarge', 'pumpkaboosmall', 'pumpkaboosuper', 'quilladin', 'roselia', 'roserade', 'rotommow', 'sawsbuck', 'sceptile', 'seedot', 'serperior', 'servine', 'sewaddle', 'shaymin', 'shayminsky', 'shiftry', 'shroomish', 'simisage', 'skiddo', 'skiploom', 'snivy', 'sunflora', 'sunkern', 'swadloon', 'tangela', 'tangrowth', 'torterra', 'treecko', 'trevenant', 'tropius', 'turtwig', 'venusaur', 'victreebel', 'vileplume', 'virizion', 'weepinbell', 'whimsicott', 'wormadam', 'accelgor', 'anorith', 'arceusbug', 'ariados', 'armaldo', 'beautifly', 'beedrill', 'burmy', 'butterfree', 'cascoon', 'caterpie', 'combee', 'crustle', 'durant', 'dustox', 'dwebble', 'escavalier', 'forretress', 'galvantula', 'genesect', 'heracross', 'illumise', 'joltik', 'kakuna', 'karrablast', 'kricketot', 'kricketune', 'larvesta', 'ledian', 'ledyba', 'masquerain', 'metapod', 'mothim', 'nincada', 'ninjask', 'pineco', 'pinsir', 'scatterbug', 'scizor', 'scolipede', 'scyther', 'shedinja', 'shelmet', 'shuckle', 'silcoon', 'skorupi', 'spewpa', 'spinarak', 'surskit', 'venipede', 'venomoth', 'venonat', 'vespiquen', 'vivillon', 'volbeat', 'volcarona', 'weedle', 'whirlipede', 'wurmple', 'yanma', 'yanmega', 'altaria', 'arceusfairy', 'aromatisse', 'audino', 'azumarill', 'azurill', 'carbink', 'clefable', 'clefairy', 'cleffa', 'dedenne', 'diancie', 'flabebe', 'floette', 'florges', 'gardevoir', 'granbull', 'igglybuff', 'jigglypuff', 'kirlia', 'klefki', 'marill', 'mawile', 'mimejr', 'mrmime', 'ralts', 'slurpuff', 'snubbull', 'spritzee', 'swirlix', 'sylveon', 'togekiss', 'togepi', 'togetic', 'wigglytuff', 'xerneas', 'arceusflying', 'braviary', 'chatot', 'crobat', 'dodrio', 'doduo', 'drifblim', 'drifloon', 'ducklett', 'emolga', 'farfetchd', 'fearow', 'fletchinder', 'fletchling', 'gligar', 'gliscor', 'golbat', 'hawlucha', 'hooh', 'honchkrow', 'hoothoot', 'landorus', 'landorustherian', 'lugia', 'mandibuzz', 'moltres', 'murkrow', 'natu', 'noctowl', 'noibat', 'noivern', 'pelipper', 'pidgeot', 'pidgeotto', 'pidgey', 'pidove', 'rayquaza', 'rufflet', 'skarmory', 'spearow', 'staraptor', 'staravia', 'starly', 'swablu', 'swanna', 'swellow', 'swoobat', 'taillow', 'talonflame', 'thundurus', 'thundurustherian', 'tornadus', 'tornadustherian', 'tranquill', 'unfezant', 'vullaby', 'wingull', 'woobat', 'xatu', 'zapdos', 'zubat', 'nidoranf', 'nidorina', 'nidoranm', 'nidorino', 'sentret', 'whismur', 'plusle', 'minun', 'spinda', 'buneary', 'lopunny', 'victini', 'bunnelby', 'diggersby', 'rattata', 'raticate', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'diglett', 'dugtrio', 'cyndaquil', 'quilava', 'furret', 'pichu', 'zigzagoon', 'linoone', 'bidoof', 'bibarel', 'pachirisu', 'patrat', 'watchog', 'drilbur', 'excadrill', 'minccino', 'cinccino', 'kyogre', 'groudon'];
+		pokemonList = pokemonList.randomize();
+
+		var pokemonPool = [];
+		for (var id in this.data.FormatsData) {
+			var template = this.getTemplate(id);
+			if (!template.isMega && !template.isPrimal && !template.isNonstandard && template.randomBattleMoves) {
+				pokemonPool.push(id);
+			}
+		}
+
+		var typeCount = {};
+		var typeComboCount = {};
+		var baseFormes = {};
+		var uberCount = 0;
+		var puCount = 0;
+		var megaCount = 0;
+
+		for (var i = 0; i < pokemonPool.length && pokemonLeft < 6; i++) {
+			var template = this.getTemplate(pokemonList[i]);
+			if (!template.exists) continue;
+
+			// Limit to one of each species (Species Clause)
+			if (baseFormes[template.baseSpecies]) continue;
+
+			// Not available on ORAS
+			if (template.species === 'Pichu-Spiky-eared') continue;
+
+			var tier = template.tier;
+			switch (tier) {
+			case 'PU':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (puCount > 1 && this.random(5) >= 1) continue;
+				break;
+			case 'Uber':
+				// Ubers are limited to 2 but have a 20% chance of being added anyway.
+				if (uberCount > 1 && this.random(5) >= 1) continue;
+				break;
+			case 'CAP':
+				// CAPs have 20% the normal rate
+				if (this.random(5) >= 1) continue;
+				break;
+			case 'Unreleased':
+				// Unreleased Pokémon have 20% the normal rate
+				if (this.random(5) >= 1) continue;
+			}
+
+			// Adjust rate for species with multiple formes
+			switch (template.baseSpecies) {
+			case 'Arceus':
+				if (this.random(18) >= 1) continue;
+				break;
+			case 'Basculin':
+				if (this.random(2) >= 1) continue;
+				break;
+			case 'Genesect':
+				if (this.random(5) >= 1) continue;
+				break;
+			case 'Gourgeist':
+				if (this.random(4) >= 1) continue;
+				break;
+			case 'Pikachu':
+				// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
+				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
+			}
+
+			// Limit 2 of any type
+			var types = template.types;
+			var skip = false;
+			for (var t = 0; t < types.length; t++) {
+				if (typeCount[types[t]] > 1 && this.random(5) >= 1) {
+					skip = true;
+					break;
+				}
+			}
+			if (skip) continue;
+
+			var set = this.randomSet(template, pokemon.length, megaCount);
+
+			// Illusion shouldn't be on the last pokemon of the team
+			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
+
+			// Limit 1 of any type combination
+			var typeCombo = types.join();
+			if (set.ability === 'Drought' || set.ability === 'Drizzle') {
+				// Drought and Drizzle don't count towards the type combo limit
+				typeCombo = set.ability;
+			}
+			if (typeCombo in typeComboCount) continue;
+
+			// Limit the number of Megas to one
+			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
+			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
+			if (isMegaSet && megaCount > 0) continue;
+
+			// Okay, the set passes, add it to our team
+			pokemon.push(set);
+
+			// Now that our Pokemon has passed all checks, we can increment our counters
+			pokemonLeft++;
+
+			// Increment type counters
+			for (var t = 0; t < types.length; t++) {
+				if (types[t] in typeCount) {
+					typeCount[types[t]]++;
+				} else {
+					typeCount[types[t]] = 1;
+				}
+			}
+			typeComboCount[typeCombo] = 1;
+
+			// Increment Uber/NU counters
+			if (tier === 'Uber') {
+				uberCount++;
+			} else if (tier === 'PU') {
+				puCount++;
+			}
+
+			// Increment mega and base species counters
+			if (isMegaSet) megaCount++;
+			baseFormes[template.baseSpecies] = 1;
+		}
+		return pokemon;
+	},
 	randomOrbTeam: function (side) {
 		var pokemonLeft = 0;
 		var pokemon = [];
