@@ -3711,23 +3711,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
@@ -3842,23 +3830,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
@@ -3973,23 +3949,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
@@ -4122,23 +4086,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
@@ -4268,23 +4220,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
@@ -4396,23 +4336,11 @@ exports.BattleScripts = {
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
 			var tier = template.tier;
-			switch (tier) {
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
+			if (tier === 'LC' && puCount > 1) continue;
+			if ((tier === 'NFE' || tier === 'PU') && puCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
+			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
