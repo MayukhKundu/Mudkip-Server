@@ -2845,6 +2845,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	castform: {
+		randomBattleMoves: ["sunnyday","raindance","weatherball","thunderbolt","icebeam"],
 		tier: "PU"
 	},
 	castformsunny: {
