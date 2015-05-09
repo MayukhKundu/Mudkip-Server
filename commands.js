@@ -188,6 +188,7 @@ var commands = exports.commands = {
 				var targetRoom = Rooms.search(innerTarget);
 				if (!targetRoom || targetRoom === Rooms.global) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + innerTarget + '" does not exist.');
 				if (targetRoom.staffRoom && !targetUser.isStaff) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text User "' + this.targetUsername + '" requires global auth to join room "' + targetRoom.id + '".');
+				if (targetRoom.clanLeaderRoom && !targetUser.isClanLeader) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text User "' + this.targetUsername + '" requires clan leader status to join room "' + targetRoom.id + '".');
 				if (targetRoom.isPrivate === true && targetRoom.modjoin && targetRoom.auth) {
 					if (Config.groupsranking.indexOf(targetRoom.auth[targetUser.userid] || ' ') < Config.groupsranking.indexOf(targetRoom.modjoin) && !targetUser.can('bypassall')) {
 						return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + innerTarget + '" does not exist.');
@@ -377,12 +378,12 @@ var commands = exports.commands = {
 		if (!this.can('makeroom')) return;
 		if (target === 'off') {
 			delete room.clanLeaderRoom;
-			this.addModCommand("" + user.name + " removed this room from the clan leader autojoin list.");
+			this.addModCommand("" + user.name + " removed this room from the clan leader room list.");
 			delete room.chatRoomData.clanLeaderRoom;
 			Rooms.global.writeChatRoomData();
 		} else {
 			room.clanLeaderRoom = true;
-			this.addModCommand("" + user.name + " added this room to the clan leader autojoin list.");
+			this.addModCommand("" + user.name + " added this room to the clan leader room list.");
 			room.chatRoomData.clanLeaderRoom = true;
 			Rooms.global.writeChatRoomData();
 		}
