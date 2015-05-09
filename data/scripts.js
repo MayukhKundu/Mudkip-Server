@@ -4434,8 +4434,6 @@ exports.BattleScripts = {
 				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
 			}
 
-			var types = template.types;
-
 			if (potd && potd.exists) {
 				// The Pokemon of the Day belongs in slot 2
 				if (pokemon.length === 1) {
@@ -4467,6 +4465,8 @@ exports.BattleScripts = {
 			pokemonLeft++;
 
 			// Increment type counters
+			var types = template.types;
+			var typeCombo = types.join();
 			for (var t = 0; t < types.length; t++) {
 				if (types[t] in typeCount) {
 					typeCount[types[t]]++;
