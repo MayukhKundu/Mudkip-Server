@@ -3100,7 +3100,6 @@ exports.BattleScripts = {
 		var typeCount = {};
 		var typeComboCount = {};
 		var baseFormes = {};
-		var uberCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -3122,10 +3121,6 @@ exports.BattleScripts = {
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
 				break;
 			case 'CAP':
 				// CAPs have 20% the normal rate
@@ -3224,9 +3219,7 @@ exports.BattleScripts = {
 			typeComboCount[typeCombo] = 1;
 
 			// Increment Uber/NU counters
-			if (tier === 'Uber') {
-				uberCount++;
-			} else if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
 				puCount++;
 			}
 
@@ -3931,7 +3924,7 @@ exports.BattleScripts = {
 			// Adjust rate for species with multiple formes
 			switch (template.baseSpecies) {
 			case 'Arceus':
-				if (this.random(18) >= 1) continue;
+				if (this.random(3) >= 1) continue;
 				break;
 			case 'Basculin':
 				if (this.random(2) >= 1) continue;
