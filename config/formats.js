@@ -309,6 +309,7 @@ exports.Formats = [
 		name: "Spring Random",
 		section: "Random Battles (aka Randbats)",
 
+		mod: 'springrandom',
 		team: 'randomSpring',
 		ruleset: ['Random (no PotD)'],
 		onBegin: function() {
