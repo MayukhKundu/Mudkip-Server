@@ -182,7 +182,7 @@ exports.parse = {
 				if (this.isBlacklisted(toId(by), room)) return this.say(room, '/ban ' + by + ', Blacklisted user');
 
 				spl = spl.slice(3).join('|');
-				if ('%@#&~'.indexOf(by.charAt(0)) < 0) this.processChatData(toId(by), room, spl);
+				if ('+=%@&#~'.indexOf(by.charAt(0)) < 0) this.processChatData(toId(by), room, spl);
 				this.chatMessage(spl, by, room);
 				break;
 			case 'c:':
@@ -190,7 +190,7 @@ exports.parse = {
 				if (this.isBlacklisted(toId(by), room)) return this.say(room, '/ban ' + by + ', Blacklisted user');
 
 				spl = spl.slice(4).join('|');
-				if ('%@#&~'.indexOf(by.charAt(0)) < 0) this.processChatData(toId(by), room, spl);
+				if ('+=%@&#~'.indexOf(by.charAt(0)) < 0) this.processChatData(toId(by), room, spl);
 				this.chatMessage(spl, by, room);
 				break;
 			case 'pm':
