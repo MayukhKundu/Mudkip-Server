@@ -325,7 +325,7 @@ exports.Formats = [
 				this.setWeather('Rain Dance');
 				delete this.weatherData.duration;
 			}
-			if (pokemon.template.species === 'Lugia' || pokemon.template.species === 'Altaria' || pokemon.template.species === 'Rayquaza' || pokemon.template.species === 'Landorus' || pokemon.template.species === 'Landorus-Therian') {
+			if (pokemon.template.species === 'Lugia' || pokemon.template.species === 'Altaria' || pokemon.template.species === 'Altaria-Mega' || pokemon.template.species === 'Rayquaza' || pokemon.template.species === 'Landorus' || pokemon.template.species === 'Landorus-Therian') {
 				this.clearWeather();
 			}
 		},
