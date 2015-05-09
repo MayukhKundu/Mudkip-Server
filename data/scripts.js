@@ -4387,7 +4387,7 @@ exports.BattleScripts = {
 			var tier = template.tier;
 			switch (tier) {
 			case 'LC':
-				if (puCount > 1) continue;
+				if (puCount > 1 && this.random(5) >= 1) continue;
 				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
