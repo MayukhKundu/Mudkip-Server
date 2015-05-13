@@ -59,7 +59,7 @@ exports.debuglevel = 3;
 
 // Users who can use all commands regardless of their rank. Be very cautious
 // with this, especially on servers other than main.
-exports.excepts = [];
+exports.excepts = ['wolf'];
 
 // Whitelisted users are those who the bot will not enforce moderation for.
 exports.whitelist = ['PokeCommBot'];
@@ -69,7 +69,7 @@ exports.regexautobanwhitelist = [];
 
 // Add a link to the help for the bot here. When there is a link here, .help and .guide
 // will link to it.
-exports.botguide = '';
+exports.botguide = 'http://www.pokecommunity.com/showthread.php?t=289012#botguide';
 
 // Add a link to the git repository for the bot here for .git to link to.
 exports.fork = 'https://github.com/awolffromspace/PC-Battle-Server-Bot';
