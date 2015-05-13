@@ -482,10 +482,10 @@ exports.parse = {
 			if (minutes) times.unshift(minutes + (minutes === 1 ? ' minute' : ' minutes'));
 			if (time >= 60) {
 				time = ~~((time - minutes) / 60);
-				hours = time % 24;
+				var hours = time % 24;
 				if (hours) times.unshift(hours + (hours === 1 ? ' hour' : ' hours'));
 				if (time >= 24) {
-					days = ~~((time - hours) / 24);
+					var days = ~~((time - hours) / 24);
 					if (days) times.unshift(days + (days === 1 ? ' day' : ' days'));
 				}
 			}
