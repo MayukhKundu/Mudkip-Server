@@ -184,6 +184,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 			target = '';
 		}
 	} else if (message.charAt(0) === '!') {
+		if (message === '!emoticons' || message === '!emoticon') return connection.sendTo(room, "Please use /emoticons instead of !emoticons.");
 		var spaceIndex = message.indexOf(' ');
 		if (spaceIndex > 0) {
 			cmd = message.substr(0, spaceIndex);
