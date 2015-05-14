@@ -637,14 +637,14 @@ exports.Formats = [
 		section: "Random Battles (aka Randbats)",
 
 		team: 'randomCC',
-		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['HP Percentage Mod', 'Cancel Mod']
 	},
 	{
 		name: "1v1 Challenge Cup",
 		section: "Random Battles (aka Randbats)",
 
 		team: 'randomCC',
-		ruleset: ['Pokemon', 'Team Preview 1v1', 'HP Percentage Mod', 'Cancel Mod'],
+		ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Team Preview 1v1'],
 		onBegin: function () {
 			this.debug('Cutting down to 1');
 			this.p1.pokemon = this.p1.pokemon.slice(0, 1);
@@ -654,21 +654,13 @@ exports.Formats = [
 		}
 	},
 	{
-		name: "Hackmons Challenge Cup",
-		section: "Random Battles (aka Randbats)",
-
-		team: 'randomHackmonsCC',
-		searchShow: false,
-		ruleset: ['HP Percentage Mod', 'Cancel Mod']
-	},
-	{
 		name: "Doubles Challenge Cup",
 		section: 'Random Battles (aka Randbats)',
 
 		gameType: 'doubles',
 		team: 'randomCC',
 		searchShow: false,
-		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['HP Percentage Mod', 'Cancel Mod']
 	},
 	{
 		name: "Triples Challenge Cup",
@@ -677,7 +669,7 @@ exports.Formats = [
 		gameType: 'triples',
 		team: 'randomCC',
 		searchShow: false,
-		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['HP Percentage Mod', 'Cancel Mod']
 	},
 
 	// XY Doubles
@@ -838,7 +830,7 @@ exports.Formats = [
 		gameType: 'triples',
 		ruleset: ['HP Percentage Mod', 'Sleep Clause Mod', 'Cancel Mod'],
 		onBegin: function () {
-			this.add('raw|<b><font color="red">IMPORTANT!</font></b> All moves on this seasonal are custom. Use the command /seasonaldata or /sdata or /sdt to know what they do.');
+			this.add('raw|<b><font color="red">IMPORTANT!</font></b> All moves on this seasonal are custom. Use the command <b>/seasonaldata</b>, <b>/sdata</b>, or <b>/sdt</b> to know what they do.');
 			this.add('raw|More information can be found <a href="http://www.smogon.com/forums/threads/3491902/page-12#post-6202283">here</a>');
 		},
 		onModifyMove: function (move) {
@@ -851,7 +843,7 @@ exports.Formats = [
 				flamethrower: "Flamestrike", fireblast: "Conflagration", thunderbolt: "Moonfire", thunder: "Starfire",
 				toxic: "Corruption", leechseed: "Soul Leech", icebeam: "Ice Lance", freezeshock: "Frostbite",
 				aircutter: "Hurricane", muddywater: "Storm", furyswipes: "Fury", scratch: "Garrote", slash: "Mutilate",
-				smog: "Poison Gas", protect: "Evasion"
+				smog: "Poison Gas", protect: "Evasion", matblock: "Sacred Shield"
 			};
 			if (move.id in legitNames) {
 				move.name = legitNames[move.id];
@@ -938,7 +930,7 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['NU'],
-		banlist: ['NU', 'BL4', 'Altarianite', 'Beedrillite', 'Lopunnite', 'Chatter']
+		banlist: ['NU', 'BL4', 'Altarianite', 'Beedrillite', 'Lopunnite', 'Chatter', 'Shell Smash + Baton Pass']
 	},
 	{
 		name: "Inverse Battle",
@@ -1029,7 +1021,7 @@ exports.Formats = [
 		banlist: ['Abra', 'Aipom', 'Archen', 'Bunnelby', 'Carvanha', 'Chinchou', 'Cottonee', 'Croagunk', 'Diglett',
 			'Drilbur', 'Dwebble', 'Elekid', 'Ferroseed', 'Fletchling', 'Foongus', 'Gastly', 'Gothita', 'Houndour', 'Larvesta', 'Magnemite', 'Mienfoo',
 			'Munchlax', 'Omanyte', 'Onix', 'Pawniard', 'Ponyta', 'Porygon', 'Pumpkaboo-Super', 'Scraggy', 'Shellder', 'Skrelp', 'Snivy',
-			'Snubbull', 'Spritzee', 'Staryu', 'Surskit', 'Timburr', 'Tirtouga', 'Vullaby', 'Zigzagoon', 'Shell Smash'
+			'Snubbull', 'Spritzee', 'Staryu', 'Surskit', 'Timburr', 'Tirtouga', 'Vullaby', 'Zigzagoon', 'Shell Smash', 'Vulpix'
 		]
 	},
 	{
@@ -1411,22 +1403,22 @@ exports.Formats = [
 		team: 'random',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Freeze Clause Mod', 'HP Percentage Mod', 'Cancel Mod']
 	},
-	{
+	/*{
 		name: "[Gen 1] Challenge Cup",
 		section: "Past Generations",
 
 		mod: 'gen1',
-		searchShow: false,
 		team: 'randomCC',
+		searchShow: false,
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Freeze Clause Mod', 'HP Percentage Mod', 'Cancel Mod']
-	},
+	},*/
 	{
 		name: "[Gen 1] Stadium",
 		section: "Past Generations",
 
 		mod: 'stadium',
 		searchShow: false,
-		ruleset: ['Pokemon', 'Standard'],
+		ruleset: ['Pokemon', 'Standard', 'Team Preview'],
 		banlist: ['Uber',
 			'Nidoking + Fury Attack + Thrash', 'Exeggutor + Poison Powder + Stomp', 'Exeggutor + Sleep Powder + Stomp',
 			'Exeggutor + Stun Spore + Stomp', 'Jolteon + Focus Energy + Thunder Shock', 'Flareon + Focus Energy + Ember'
