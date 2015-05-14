@@ -306,6 +306,13 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "Community Random",
+		section: "Random Battles (aka Randbats)",
+
+		team: 'randomCommunity',
+		ruleset: ['Random (no PotD)']
+	},
+	{
 		name: "Spring Random",
 		section: "Random Battles (aka Randbats)",
 
@@ -576,13 +583,6 @@ exports.Formats = [
 				}
 			}
 		},
-		ruleset: ['Random (no PotD)']
-	},
-	{
-		name: "Community Random",
-		section: "Random Battles (aka Randbats)",
-
-		team: 'randomCommunity',
 		ruleset: ['Random (no PotD)']
 	},
 	{
