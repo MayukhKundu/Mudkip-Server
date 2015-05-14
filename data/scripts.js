@@ -3099,15 +3099,11 @@ exports.BattleScripts = {
 
 		var pokemonPool = ['aegislash', 'arceus', 'arceusbug', 'arceusdark', 'arceusdragon', 'arceuselectric', 'arceusfairy', 'arceusfighting', 'arceusfire', 'arceusflying', 'arceusghost', 'arceusgrass', 'arceusground', 'arceusice', 'arceuspoison', 'arceuspsychic', 'arceusrock', 'arceussteel', 'arceuswater', 'blaziken', 'darkrai', 'deoxys', 'deoxysattack', 'deoxysdefense', 'deoxysspeed', 'dialga', 'genesect', 'gengar', 'giratina', 'giratinaorigin', 'greninja', 'groudon', 'hooh', 'kangaskhan', 'kyogre', 'kyuremwhite', 'lucario', 'lugia', 'mawile', 'mewtwo', 'palkia', 'rayquaza', 'reshiram', 'salamence', 'shayminsky', 'xerneas', 'yveltal', 'zekrom'];
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
 
 		var typeCount = {};
 		var typeComboCount = {};
 		var baseFormes = {};
+		var uberCount = 0;
 		var puCount = 0;
 		var megaCount = 0;
 
@@ -3124,11 +3120,17 @@ exports.BattleScripts = {
 			var tier = template.tier;
 			switch (tier) {
 			case 'LC':
+			case 'LC Uber':
+			case 'NFE':
 				if (puCount > 1) continue;
 				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
+				break;
+			case 'Uber':
+				// Ubers are limited to 2 but have a 20% chance of being added anyway.
+				if (uberCount > 1 && this.random(5) >= 1) continue;
 				break;
 			case 'CAP':
 				// CAPs have 20% the normal rate
@@ -3178,20 +3180,6 @@ exports.BattleScripts = {
 			}
 			if (skip) continue;
 
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
-
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
 			// Illusion shouldn't be on the last pokemon of the team
@@ -3227,7 +3215,9 @@ exports.BattleScripts = {
 			typeComboCount[typeCombo] = 1;
 
 			// Increment Uber/NU counters
-			if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			if (tier === 'Uber') {
+				uberCount++;
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
 				puCount++;
 			}
 
