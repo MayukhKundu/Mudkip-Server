@@ -3228,11 +3228,6 @@ exports.BattleScripts = {
 
 		var pokemonPool = ['altaria', 'azumarill', 'bisharp', 'breloom', 'celebi', 'chansey', 'charizard', 'clefable', 'conkeldurr', 'diancie', 'dragonite', 'excadrill', 'ferrothorn', 'gallade', 'garchomp', 'gardevoir', 'gengar', 'gliscor', 'gothitelle', 'gyarados', 'heatran', 'jirachi', 'keldeo', 'kyuremblack', 'landorus', 'landorustherian', 'latias', 'latios', 'lopunny', 'magnezone', 'mamoswine', 'manaphy', 'mandibuzz', 'manectric', 'metagross', 'mew', 'raikou', 'rotomwash', 'sableye', 'scizor', 'skarmory', 'slowbro', 'starmie', 'sylveon', 'talonflame', 'thundurus', 'tyranitar', 'venusaur', 'zapdos', 'crawdaunt', 'diggersby', 'hawlucha', 'klefki', 'medicham', 'scolipede', 'serperior', 'smeargle', 'staraptor', 'terrakion', 'thundurustherian', 'togekiss', 'tornadustherian', 'venomoth', 'victini', 'volcarona', 'weavile', 'zygarde', 'absol', 'aerodactyl', 'aggron', 'alakazam', 'ampharos', 'arcanine', 'azelf', 'beedrill', 'blastoise', 'blissey', 'chandelure', 'chesnaught', 'cloyster', 'crobat', 'darmanitan', 'donphan', 'empoleon', 'entei', 'espeon', 'florges', 'flygon', 'forretress', 'galvantula', 'gligar', 'goodra', 'haxorus', 'heracross', 'hippowdon', 'honchkrow', 'hydreigon', 'infernape', 'kingdra', 'krookodile', 'lucario', 'machamp', 'mienshao', 'milotic', 'nidoking', 'nidoqueen', 'noivern', 'pidgeot', 'pinsir', 'porygonz', 'porygon2', 'roserade', 'rotomheat', 'salamence', 'sceptile', 'scrafty', 'sharpedo', 'shaymin', 'snorlax', 'suicune', 'swampert', 'tentacruel', 'toxicroak', 'trevenant', 'umbreon', 'vaporeon', 'dragalge', 'froslass', 'houndoom', 'kyurem', 'shuckle', 'tornadus', 'yanmega', 'zoroark'];
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
 
 		var typeCount = {};
 		var typeComboCount = {};
@@ -3254,6 +3249,8 @@ exports.BattleScripts = {
 			var tier = template.tier;
 			switch (tier) {
 			case 'LC':
+			case 'LC Uber':
+			case 'NFE':
 				if (puCount > 1) continue;
 				break;
 			case 'PU':
@@ -3311,20 +3308,6 @@ exports.BattleScripts = {
 				}
 			}
 			if (skip) continue;
-
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
@@ -3363,7 +3346,7 @@ exports.BattleScripts = {
 			// Increment Uber/NU counters
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
 				puCount++;
 			}
 
@@ -3379,11 +3362,6 @@ exports.BattleScripts = {
 
 		var pokemonPool = ['abomasnow', 'accelgor', 'alomomola', 'ambipom', 'amoonguss', 'aromatisse', 'banette', 'braviary', 'bronzong', 'cinccino', 'clawitzer', 'cobalion', 'cofagrigus', 'cresselia', 'delphox', 'doublade', 'drapion', 'druddigon', 'dugtrio', 'durant', 'eelektross', 'emboar', 'escavalier', 'exploud', 'fletchinder', 'gastrodon', 'glalie', 'golbat', 'hitmonchan', 'hitmonlee', 'hitmontop', 'houndoom', 'jellicent', 'jolteon', 'kabutops', 'magneton', 'medicham', 'meloetta', 'moltres', 'omastar', 'pangoro', 'registeel', 'reuniclus', 'rhyperior', 'rotommow', 'shiftry', 'skuntank', 'slowking', 'slurpuff', 'spiritomb', 'tangrowth', 'tyrantrum', 'whimsicott', 'combusken', 'sigilyph', 'arbok', 'archeops', 'ariados', 'armaldo', 'articuno', 'audino', 'aurorus', 'avalugg', 'barbaracle', 'basculin', 'basculinbluestriped', 'bastiodon', 'beartic', 'beautifly', 'beheeyem', 'bellossom', 'bibarel', 'bouffalant', 'butterfree', 'cacturne', 'camerupt', 'carbink', 'carnivine', 'carracosta', 'castform', 'chatot', 'cherrim', 'chimecho', 'claydol', 'corsola', 'cradily', 'crustle', 'cryogonal', 'dedenne', 'delcatty', 'delibird', 'dewgong', 'ditto', 'dodrio', 'dragonair', 'drifblim', 'dunsparce', 'duosion', 'dusclops', 'dusknoir', 'dustox', 'electivire', 'electrode', 'emolga', 'exeggutor', 'farfetchd', 'fearow', 'feraligatr', 'ferroseed', 'flareon', 'floatzel', 'floette', 'fraxure', 'frogadier', 'furfrou', 'furret', 'gabite', 'garbodor', 'gigalith', 'girafarig', 'glaceon', 'gogoat', 'golduck', 'golem', 'golurk', 'gorebyss', 'gourgeist', 'gourgeistlarge', 'gourgeistsmall', 'gourgeistsuper', 'granbull', 'grumpig', 'gurdurr', 'hariyama', 'haunter', 'heatmor', 'heliolisk', 'huntail', 'hypno', 'illumise', 'jumpluff', 'jynx', 'kadabra', 'kangaskhan', 'kecleon', 'kingler', 'klinklang', 'kricketune', 'lampent', 'lanturn', 'lapras', 'leafeon', 'leavanny', 'ledian', 'lickilicky', 'liepard', 'lilligant', 'linoone', 'ludicolo', 'lumineon', 'lunatone', 'luvdisc', 'luxray', 'machoke', 'magcargo', 'magmortar', 'malamar', 'mantine', 'maractus', 'marowak', 'masquerain', 'mawile', 'meganium', 'meowsticf', 'meowstic', 'mesprit', 'metang', 'mightyena', 'miltank', 'minun', 'misdreavus', 'mismagius', 'mothim', 'mrmime', 'muk', 'murkrow', 'musharna', 'ninetales', 'ninjask', 'noctowl', 'octillery', 'pachirisu', 'parasect', 'pelipper', 'persian', 'phione', 'pikachu', 'pikachucosplay', 'pikachurockstar', 'pikachubelle', 'pikachupopstar', 'pikachuphd', 'pikachulibre', 'piloswine', 'plusle', 'politoed', 'poliwrath', 'primeape', 'probopass', 'purugly', 'pyroar', 'quagsire', 'quilladin', 'qwilfish', 'raichu', 'rampardos', 'rapidash', 'raticate', 'regice', 'regigigas', 'regirock', 'relicanth', 'rhydon', 'roselia', 'rotom', 'rotomfan', 'rotomfrost', 'samurott', 'sandslash', 'sawk', 'sawsbuck', 'scyther', 'seadra', 'seaking', 'seismitoad', 'seviper', 'shedinja', 'shelgon', 'simipour', 'simisage', 'simisear', 'slaking', 'sliggoo', 'sneasel', 'solrock', 'spinda', 'stantler', 'steelix', 'stoutland', 'stunfisk', 'sudowoodo', 'sunflora', 'swalot', 'swanna', 'swellow', 'swoobat', 'tangela', 'tauros', 'throh', 'togetic', 'torkoal', 'torterra', 'tropius', 'typhlosion', 'unfezant', 'unown', 'ursaring', 'uxie', 'vanilluxe', 'vespiquen', 'victreebel', 'vigoroth', 'vileplume', 'virizion', 'vivillon', 'volbeat', 'wailord', 'walrein', 'watchog', 'weezing', 'whiscash', 'wigglytuff', 'wobbuffet', 'wormadam', 'wormadamsandy', 'wormadamtrash', 'xatu', 'zangoose', 'zebstrika'];
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
 
 		var typeCount = {};
 		var typeComboCount = {};
@@ -3405,6 +3383,8 @@ exports.BattleScripts = {
 			var tier = template.tier;
 			switch (tier) {
 			case 'LC':
+			case 'LC Uber':
+			case 'NFE':
 				if (puCount > 1) continue;
 				break;
 			case 'PU':
@@ -3462,20 +3442,6 @@ exports.BattleScripts = {
 				}
 			}
 			if (skip) continue;
-
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
@@ -3525,7 +3491,7 @@ exports.BattleScripts = {
 			// Increment Uber/NU counters
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
 				puCount++;
 			}
 
@@ -3541,11 +3507,6 @@ exports.BattleScripts = {
 
 		var pokemonPool = ['abra', 'aipom', 'amaura', 'anorith', 'archen', 'aron', 'axew', 'azurill', 'bagon', 'baltoy', 'barboach', 'beldum', 'bellsprout', 'bergmite', 'bidoof', 'binacle', 'blitzle', 'bonsly', 'bronzor', 'budew', 'buizel', 'bulbasaur', 'buneary', 'bunnelby', 'burmy', 'cacnea', 'carvanha', 'caterpie', 'charmander', 'cherubi', 'chespin', 'chikorita', 'chimchar', 'chinchou', 'chingling', 'clamperl', 'clauncher', 'cleffa', 'combee', 'corphish', 'cottonee', 'cranidos', 'croagunk', 'cubchoo', 'cubone', 'cyndaquil', 'darumaka', 'deerling', 'deino', 'diglett', 'doduo', 'dratini', 'drifloon', 'drilbur', 'drowzee', 'ducklett', 'duskull', 'dwebble', 'eevee', 'ekans', 'electrike', 'elekid', 'elgyem', 'espurr', 'exeggcute', 'feebas', 'fennekin', 'ferroseed', 'finneon', 'flabebe', 'fletchling', 'foongus', 'frillish', 'froakie', 'gastly', 'geodude', 'gible', 'glameow', 'goldeen', 'golett', 'goomy', 'gothita', 'grimer', 'growlithe', 'gulpin', 'happiny', 'helioptile', 'hippopotas', 'honedge', 'hoothoot', 'hoppip', 'horsea', 'houndour', 'igglybuff', 'inkay', 'joltik', 'kabuto', 'karrablast', 'klink', 'koffing', 'krabby', 'kricketot', 'larvesta', 'larvitar', 'ledyba', 'lickitung', 'lileep', 'lillipup', 'litleo', 'litwick', 'lotad', 'machop', 'magby', 'magikarp', 'magnemite', 'makuhita', 'mankey', 'mantyke', 'mareep', 'meowth', 'mienfoo', 'mimejr', 'minccino', 'mudkip', 'munchlax', 'munna', 'natu', 'nidoranf', 'nidoranm', 'nincada', 'noibat', 'nosepass', 'numel', 'oddish', 'omanyte', 'onix', 'oshawott', 'pancham', 'panpour', 'pansage', 'pansear', 'paras', 'patrat', 'pawniard', 'petilil', 'phanpy', 'phantump', 'pichu', 'pidgey', 'pidove', 'pineco', 'piplup', 'poliwag', 'ponyta', 'poochyena', 'porygon', 'psyduck', 'pumpkaboo', 'pumpkaboolarge', 'pumpkaboosmall', 'pumpkaboosuper', 'purrloin', 'ralts', 'rattata', 'remoraid', 'rhyhorn', 'riolu', 'roggenrola', 'rufflet', 'sandile', 'sandshrew', 'scatterbug', 'scraggy', 'seedot', 'seel', 'sentret', 'sewaddle', 'shellder', 'shellos', 'shelmet', 'shieldon', 'shinx', 'shroomish', 'shuppet', 'skiddo', 'skitty', 'skorupi', 'skrelp', 'slakoth', 'slowpoke', 'slugma', 'smoochum', 'snivy', 'snorunt', 'snover', 'snubbull', 'solosis', 'spearow', 'spheal', 'spinarak', 'spoink', 'spritzee', 'squirtle', 'starly', 'staryu', 'stunky', 'sunkern', 'surskit', 'swablu', 'swinub', 'taillow', 'teddiursa', 'tentacool', 'tepig', 'timburr', 'tirtouga', 'togepi', 'torchic', 'totodile', 'trapinch', 'treecko', 'trubbish', 'turtwig', 'tympole', 'tynamo', 'tyrogue', 'tyrunt', 'vanillite', 'venipede', 'venonat', 'voltorb', 'vullaby', 'wailmer', 'weedle', 'whismur', 'wingull', 'woobat', 'wooper', 'wurmple', 'wynaut', 'yamask', 'zigzagoon', 'zorua', 'zubat'];
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
 
 		var typeCount = {};
 		var typeComboCount = {};
@@ -3566,6 +3527,9 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
+			case 'NFE':
+				if (puCount > 1) continue;
+				break;
 			case 'PU':
 				// PUs are limited to 2 but have a 20% chance of being added anyway.
 				if (puCount > 1 && this.random(5) >= 1) continue;
@@ -3622,20 +3586,6 @@ exports.BattleScripts = {
 			}
 			if (skip) continue;
 
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
-
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
 			// Illusion shouldn't be on the last pokemon of the team
@@ -3675,7 +3625,7 @@ exports.BattleScripts = {
 			// Increment Uber/NU counters
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
 				puCount++;
 			}
 
@@ -3727,12 +3677,6 @@ exports.BattleScripts = {
 			pokemonPool = kalosPool;
 		}
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
-
 		var typeCount = {};
 		var typeComboCount = {};
 		var baseFormes = {};
@@ -3753,6 +3697,8 @@ exports.BattleScripts = {
 			var tier = template.tier;
 			switch (tier) {
 			case 'LC':
+			case 'LC Uber':
+			case 'NFE':
 				if (puCount > 1) continue;
 				break;
 			case 'PU':
@@ -3811,20 +3757,6 @@ exports.BattleScripts = {
 			}
 			if (skip) continue;
 
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
-
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
 			// Illusion shouldn't be on the last pokemon of the team
@@ -3862,7 +3794,7 @@ exports.BattleScripts = {
 			// Increment Uber/NU counters
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'PU' || tier === 'NFE' || tier === 'LC') {
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
 				puCount++;
 			}
 
