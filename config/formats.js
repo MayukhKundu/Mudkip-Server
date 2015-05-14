@@ -599,7 +599,7 @@ exports.Formats = [
 
 		mod: 'metronomerandom',
 		team: 'randomMetronome',
-		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview GBU'],
+		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview GBU'],
 		onBegin: function() {
 			this.debug('Cutting down to 3');
 			this.p1.pokemon = this.p1.pokemon.slice(0, 3);
@@ -614,7 +614,7 @@ exports.Formats = [
 
 		mod: 'metronomerandom',
 		team: 'randomMetronome',
-		ruleset: ['Random (no PotD)']
+		ruleset: ['Random']
 	},
 	{
 		name: "Doubles Random",
