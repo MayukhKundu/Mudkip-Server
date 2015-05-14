@@ -4411,9 +4411,6 @@ exports.BattleScripts = {
 			case 'Meloetta':
 				if (this.random(2) >= 1) continue;
 				break;
-			case 'Castform':
-				if (this.random(2) >= 1) continue;
-				break;
 			case 'Pikachu':
 				// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
 				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
@@ -4959,10 +4956,6 @@ exports.BattleScripts = {
 			case 'Castform':
 				if (this.random(2) >= 1) continue;
 				break;
-			case 'Pikachu':
-				// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
-				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
-			}
 
 			// Limit 2 of any type
 			var types = template.types;
