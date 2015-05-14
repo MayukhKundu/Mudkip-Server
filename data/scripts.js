@@ -4375,13 +4375,6 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
-			case 'LC':
-			case 'LC Uber':
-			case 'NFE':
-			case 'PU':
-			case 'Uber':
-				if (this.random(5) >= 1) continue;
-				break;
 			case 'CAP':
 				// CAPs have 20% the normal rate
 				if (this.random(5) >= 1) continue;
@@ -4917,13 +4910,6 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
-			case 'LC':
-			case 'LC Uber':
-			case 'NFE':
-			case 'PU':
-			case 'Uber':
-				if (this.random(5) >= 1) continue;
-				break;
 			case 'CAP':
 				// CAPs have 20% the normal rate
 				if (this.random(5) >= 1) continue;
