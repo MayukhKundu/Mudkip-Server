@@ -4955,7 +4955,6 @@ exports.BattleScripts = {
 				break;
 			case 'Castform':
 				if (this.random(2) >= 1) continue;
-				break;
 			}
 
 			// Limit 2 of any type
