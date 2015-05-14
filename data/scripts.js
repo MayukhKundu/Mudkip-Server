@@ -5090,12 +5090,6 @@ exports.BattleScripts = {
 			}
 		}
 
-		// PotD stuff
-		var potd;
-		if (Config.potd && 'Rule:potd' in this.getBanlistTable(this.getFormat())) {
-			potd = this.getTemplate(Config.potd);
-		}
-
 		var typeCount = {};
 		var typeComboCount = {};
 		var baseFormes = {};
@@ -5177,20 +5171,6 @@ exports.BattleScripts = {
 				}
 			}
 			if (skip) continue;
-
-			if (potd && potd.exists) {
-				// The Pokemon of the Day belongs in slot 2
-				if (pokemon.length === 1) {
-					template = potd;
-					if (template.species === 'Magikarp') {
-						template.randomBattleMoves = ['bounce', 'flail', 'splash', 'magikarpsrevenge'];
-					} else if (template.species === 'Delibird') {
-						template.randomBattleMoves = ['present', 'bestow'];
-					}
-				} else if (template.species === potd.species) {
-					continue; // No, thanks, I've already got one
-				}
-			}
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
