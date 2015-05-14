@@ -633,6 +633,13 @@ exports.Formats = [
 		ruleset: ['PotD', 'Pokemon', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview']
 	},
 	{
+		name: "Battle Factory",
+		section: "Random Battles (aka Randbats)",
+
+		team: 'randomFactory',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod']
+	},
+	{
 		name: "Challenge Cup",
 		section: "Random Battles (aka Randbats)",
 
