@@ -111,6 +111,17 @@ exports.BattleFormatsData = {
 		requiredItem: "Manectite",
 		tier: "OU"
 	},
+	altaria: {
+		randomBattleMoves: ["dragondance","dracometeor","outrage","dragonclaw","earthquake","roost","fireblast","healbell"],
+		randomDoubleBattleMoves: ["dragondance","dracometeor","protect","dragonclaw","earthquake","fireblast","tailwind"],
+		eventPokemon: [
+			{"generation":3,"level":45,"moves":["takedown","dragonbreath","dragondance","refresh"]},
+			{"generation":3,"level":36,"moves":["healbell","dragonbreath","solarbeam","aerialace"]},
+			{"generation":5,"level":35,"gender":"M","isHidden":true,"moves":["takedown","naturalgift","dragonbreath","falseswipe"]}
+		],
+		requiredItem: "Altarianite",
+		tier: "OU"
+	},
 	absol: {
 		randomBattleMoves: ["swordsdance","suckerpunch","knockoff","superpower","pursuit","playrough"],
 		randomDoubleBattleMoves: ["swordsdance","suckerpunch","knockoff","fireblast","superpower","protect","playrough"],
