@@ -3807,6 +3807,551 @@ exports.BattleScripts = {
 		}
 		return pokemon;
 	},
+	randomCommunityTeam: function (side) {
+		var pokemonLeft = 0;
+		var pokemon = [];
+
+		var pokemonPool = ['absol', 'aerodactyl', 'arcanine', 'archeops', 'aromatisse', 'azelf', 'bellossom', 'bidoof', 'blissey', 'castform', 'celebi', 'charizard', 'cofagrigus', 'cradily', 'cresselia', 'crobat', 'cyndaquil', 'darkrai', 'dragonite', 'espurr', 'feraligatr', 'gallade', 'galvantula', 'garchomp', 'gardevoir', 'gengar', 'golurk', 'gourgeist', 'greninja', 'heracross', 'hydreigon', 'igglybuff', 'infernape', 'jynx', 'lapras', 'latias', 'latios', 'liepard', 'ludicolo', 'magikarp', 'magneton', 'magnezone', 'manectric', 'mantine', 'masquerain', 'mawile', 'meganium', 'metagross', 'mew', 'mewtwo', 'milotic', 'mismagius', 'missingno', 'mudkip', 'nidoking', 'oddish', 'oshawott', 'pachirisu', 'pichu', 'pidgey', 'pikachu', 'porygon2', 'pumpkaboo', 'pupitar', 'raichu', 'reshiram', 'reuniclus', 'rhyperior', 'rotomfan', 'sableye', 'sandshrew', 'sceptile', 'scolipede', 'scrafty', 'serperior', 'shaymin', 'skarmory', 'slowbro', 'snivy', 'spheal', 'staraptor', 'starmie', 'suicune', 'sylveon', 'tangela', 'togekiss', 'typhlosion', 'tyranitar', 'vaporeon', 'venusaur', 'victini', 'volcarona', 'vulpix', 'whimsicott', 'wigglytuff', 'zebstrika', 'zekrom'];
+
+
+		var typeCount = {};
+		var typeComboCount = {};
+		var baseFormes = {};
+		var uberCount = 0;
+		var puCount = 0;
+		var megaCount = 0;
+
+		while (pokemonPool.length && pokemonLeft < 6) {
+			var template = this.getTemplate(this.sampleNoReplace(pokemonPool));
+			if (!template.exists) continue;
+
+			// Limit to one of each species (Species Clause)
+			if (baseFormes[template.baseSpecies]) continue;
+
+			// Not available on ORAS
+			if (template.species === 'Pichu-Spiky-eared') continue;
+
+			var tier = template.tier;
+			switch (tier) {
+			case 'LC':
+			case 'LC Uber':
+			case 'NFE':
+				if (puCount > 1) continue;
+				break;
+			case 'PU':
+				// PUs are limited to 2 but have a 20% chance of being added anyway.
+				if (puCount > 1 && this.random(5) >= 1) continue;
+				break;
+			case 'Uber':
+				// Ubers are limited to 2 but have a 20% chance of being added anyway.
+				if (uberCount > 1 && this.random(5) >= 1) continue;
+				break;
+			case 'CAP':
+				// CAPs have 20% the normal rate
+				if (this.random(5) >= 1) continue;
+				break;
+			case 'Unreleased':
+				// Unreleased Pokémon have 20% the normal rate
+				if (this.random(5) >= 1) continue;
+			}
+
+			// Adjust rate for species with multiple formes
+			switch (template.baseSpecies) {
+			case 'Arceus':
+				if (this.random(18) >= 1) continue;
+				break;
+			case 'Basculin':
+				if (this.random(2) >= 1) continue;
+				break;
+			case 'Genesect':
+				if (this.random(5) >= 1) continue;
+				break;
+			case 'Pumpkaboo':
+				if (this.random(4) >= 1) continue;
+				break;
+			case 'Gourgeist':
+				if (this.random(4) >= 1) continue;
+				break;
+			case 'Meloetta':
+				if (this.random(2) >= 1) continue;
+				break;
+			case 'Castform':
+				if (this.random(2) >= 1) continue;
+				break;
+			case 'Pikachu':
+				// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
+				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
+			}
+
+			// Limit 2 of any type
+			var types = template.types;
+			var skip = false;
+			for (var t = 0; t < types.length; t++) {
+				if (typeCount[types[t]] > 1 && this.random(5) >= 1) {
+					skip = true;
+					break;
+				}
+			}
+			if (skip) continue;
+
+			var set = this.randomSet(template, pokemon.length, megaCount);
+
+			// Illusion shouldn't be on the last pokemon of the team
+			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
+
+			// Limit 1 of any type combination
+			var typeCombo = types.join();
+			if (set.ability === 'Drought' || set.ability === 'Drizzle') {
+				// Drought and Drizzle don't count towards the type combo limit
+				typeCombo = set.ability;
+			}
+			if (typeCombo in typeComboCount) continue;
+
+			// Limit the number of Megas to one
+			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
+			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
+			if (isMegaSet && megaCount > 0) continue;
+
+			if (template.id === 'absol') {
+				set.species = 'absol';
+				set.name = 'Sanguine';
+			} else if (template.id === 'aerodactyl') {
+				set.species = 'aerodactyl';
+				set.name = 'H.A.N.';
+			} else if (template.id === 'arcanine') {
+				set.species = 'arcanine';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'Aslan';
+				} else {
+					set.name = 'El Héroe';
+					set.item = 'lifeorb';
+					set.ability = 'flashfire';
+					set.moves = ['flareblitz', 'extremespeed', 'closecombat', 'crunch'];
+					set.nature = 'adamant';
+					set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
+				}
+			} else if (template.id === 'archeops') {
+				set.species = 'archeops';
+				set.name = 'Nightanglet';
+				set.moves = ['acrobatics', 'earthquake', 'aquatail', 'knockoff'];
+				set.nature = 'jolly';
+				set.evs = {hp: 0, def: 0, spd: 0, spa: 0, atk: 252, spe: 252};
+			} else if (template.id === 'aromatisse') {
+				set.species = 'aromatisse';
+				set.name = 'Wilhelm';
+			} else if (template.id === 'azelf') {
+				set.species = 'azelf';
+				set.name = 'Dark Azelf';
+			} else if (template.id === 'bellossom') {
+				set.species = 'bellossom';
+				set.name = 'Leijon';
+				set.gender = 'F';
+				set.moves = ['petaldance', 'attract', 'hiddenpowerfire', 'synthesis'];
+			} else if (template.id === 'bidoof') {
+				set.species = 'bidoof';
+				set.name = 'Lalapizzame';
+			} else if (template.id === 'blissey') {
+				set.species = 'blissey';
+				set.name = 'Sonata';
+				set.gender = 'F';
+				set.item = 'assaultvest';
+				set.ability = 'serenegrace';
+				set.moves = ['fireblast', 'thunder', 'blizzard', 'psychic'];
+				set.nature = 'modest';
+				set.evs = {hp: 4, def: 252, spd: 0, spa: 252, atk: 0, spe: 0};
+			} else if (template.id === 'castform') {
+				set.species = 'castform';
+				set.name = 'Powalen';
+			} else if (template.id === 'celebi') {
+				set.species = 'celebi';
+				set.name = 'R.F.';
+			} else if (template.id === 'charizard') {
+				set.species = 'charizard';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'IndianCharizard#';
+				} else {
+					set.name = 'Rukario';
+				}
+			} else if (template.id === 'cofagrigus') {
+				set.species = 'cofagrigus';
+				set.name = 'Zeffy';
+			} else if (template.id === 'cradily') {
+				set.species = 'cradily';
+				set.name = 'oocyst';
+				set.item = 'leftovers';
+				set.moves = ['curse', 'recover', 'rockslide', 'seedbomb'];
+				set.nature = 'careful';
+				set.evs = {hp: 252, def: 4, spd: 252, spa: 0, atk: 0, spe: 0};
+			} else if (template.id === 'cresselia') {
+				set.species = 'cresselia';
+				set.name = 'Sphealo';
+				set.item = 'lightclay';
+				set.ability = 'levitate';
+				set.moves = ['reflect', 'lightscreen', 'lunardance', 'moonblast'];
+				set.nature = 'timid';
+				set.evs = {hp: 252, def: 4, spd: 0, spa: 0, atk: 0, spe: 252};
+			} else if (template.id === 'crobat') {
+				set.species = 'crobat';
+				set.name = 'Timbjerr';
+			} else if (template.id === 'cyndaquil') {
+				set.species = 'cyndaquil';
+				set.name = 'Gallant192';
+			} else if (template.id === 'darkrai') {
+				set.species = 'darkrai';
+				set.name = 'Dark Light1999';
+				set.item = 'widelens';
+				set.ability = 'baddreams';
+				set.moves = ['darkvoid', 'darkpulse', 'dreameater', 'icebeam'];
+				set.nature = 'timid';
+				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
+			} else if (template.id === 'dragonite') {
+				set.species = 'dragonite';
+				set.name = 'Dark Shadow 6';
+			} else if (template.id === 'espurr') {
+				set.species = 'espurr';
+				set.name = 'machomuu';
+			} else if (template.id === 'feraligatr') {
+				set.species = 'feraligatr';
+				set.name = 'Jin Of The Gale';
+			} else if (template.id === 'gallade') {
+				set.species = 'gallade';
+				set.name = 'PlatinumDude';
+			} else if (template.id === 'galvantula') {
+				set.species = 'galvantula';
+				set.name = 'Synerjee';
+			} else if (template.id === 'garchomp') {
+				set.species = 'garchomp';
+				set.name = 'Exile';
+			} else if (template.id === 'gardevoir') {
+				set.species = 'gardevoir';
+				set.name = 'Jellicent♀';
+			} else if (template.id === 'gengar') {
+				set.species = 'gengar';
+				set.name = 'Spartacus';
+			} else if (template.id === 'golurk') {
+				set.species = 'golurk';
+				set.name = 'Sheerow';
+			} else if (template.id === 'gourgeist') {
+				set.species = 'gourgeist';
+				set.name = 'Flushed';
+			} else if (template.id === 'greninja') {
+				set.species = 'greninja';
+				set.name = 'Chocolate™';
+			} else if (template.id === 'heracross') {
+				set.species = 'heracross';
+				set.name = 'Jake♫';
+			} else if (template.id === 'hydreigon') {
+				set.species = 'hydreigon';
+				set.name = 'Overlord Drakow';
+			} else if (template.id === 'igglybuff') {
+				set.species = 'igglybuff';
+				set.name = '«Chuckles»';
+			} else if (template.id === 'infernape') {
+				set.species = 'infernape';
+				set.name = 'Nathan';
+			} else if (template.id === 'jynx') {
+				set.species = 'jynx';
+				set.name = 'mystletainn';
+			} else if (template.id === 'lapras') {
+				set.species = 'lapras';
+				set.name = 'Altairis';
+			} else if (template.id === 'latias') {
+				set.species = 'latias';
+				set.name = 'Sector';
+			} else if (template.id === 'latios') {
+				set.species = 'latios';
+				set.name = 'Retribution';
+			} else if (template.id === 'liepard') {
+				set.species = 'liepard';
+				set.name = 'Bruce Banner';
+			} else if (template.id === 'ludicolo') {
+				set.species = 'ludicolo';
+				set.name = 'Omicron';
+			} else if (template.id === 'magikarp') {
+				set.species = 'magikarp';
+				set.name = 'Clacla';
+			} else if (template.id === 'magneton') {
+				set.species = 'magneton';
+				set.name = 'Archer99';
+				set.item = 'choicespecs';
+				set.ability = 'magnetpull';
+				set.moves = ['thunderbolt', 'flashcannon', 'voltswitch', 'hiddenpowerfire'];
+				set.nature = 'modest';
+				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
+			} else if (template.id === 'magnezone') {
+				set.species = 'magnezone';
+				set.name = 'Archer99';
+			} else if (template.id === 'manectric') {
+				set.species = 'manectric';
+				set.name = 'antemortem';
+				set.item = 'manectite';
+				set.moves = ['voltswitch', 'thunderbolt', 'hiddenpowergrass', 'flamethrower'];
+			} else if (template.id === 'mantine') {
+				set.species = 'mantine';
+				set.name = 'Blu·Ray';
+			} else if (template.id === 'masquerain') {
+				set.species = 'masquerain';
+				set.name = 'stranger';
+			} else if (template.id === 'mawile') {
+				set.species = 'mawile';
+				set.name = 'revere';
+			} else if (template.id === 'meganium') {
+				set.species = 'meganium';
+				set.name = 'Axeliira';
+			} else if (template.id === 'metagross') {
+				set.species = 'metagross';
+				set.name = 'punkysaur';
+				set.moves[0] = 'meteormash';
+				set.moves[1] = 'bulletpunch';
+			} else if (template.id === 'mew') {
+				set.species = 'mew';
+				set.name = 'Rϵd';
+			} else if (template.id === 'mewtwo') {
+				set.species = 'mewtwo';
+				set.name = 'Dakota';
+			} else if (template.id === 'milotic') {
+				set.species = 'milotic';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'Dragon';
+				} else {
+					set.name = 'TGM';
+				}
+			} else if (template.id === 'mismagius') {
+				set.species = 'mismagius';
+				set.name = 'Polar Spectrum';
+				set.item = 'colburberry';
+				set.moves = ['willowisp', 'hex', 'nastyplot', 'powergem'];
+				set.nature = 'timid';
+				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
+			} else if (template.id === 'missingno') {
+				set.species = 'missingno';
+				set.name = 'King Syn';
+				set.item = 'lifeorb';
+				set.ability = 'simple';
+				set.moves = ['swordsdance', 'extremespeed', 'zenheadbutt', 'closecombat'];
+				set.nature = 'adamant';
+				set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
+			} else if (template.id === 'mudkip') {
+				set.species = 'mudkip';
+				set.name = 'Bidoof FTW';
+			} else if (template.id === 'nidoking') {
+				set.species = 'nidoking';
+				set.name = 'jdthebud';
+			} else if (template.id === 'oddish') {
+				set.species = 'oddish';
+				set.name = 'oddísh';
+				set.item = 'eviolite';
+				set.ability = 'chlorophyll';
+				set.moves = ['solarbeam', 'sludgebomb', 'sunnyday', 'sleeppowder'];
+				set.nature = 'timid';
+				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
+			} else if (template.id === 'oshawott') {
+				set.species = 'oshawott';
+				set.name = 'Hikamaru';
+			} else if (template.id === 'pachirisu') {
+				set.species = 'pachirisu';
+				set.name = 'Melody';
+				set.gender = 'F';
+				set.shiny = true;
+				set.moves[0] = 'attract';
+				set.moves[1] = 'nuzzle';
+			} else if (template.id === 'pichu') {
+				set.species = 'pichu';
+				set.name = 'Lost Christmas';
+				set.item = 'lifeorb';
+				set.moves = ['volttackle', 'grassknot', 'toxic', 'return'];
+			} else if (template.id === 'pidgey') {
+				set.species = 'pidgey';
+				set.name = 'Olli';
+			} else if (template.id === 'pikachu') {
+				set.species = 'pikachu';
+				set.name = 'Kaori';
+			} else if (template.id === 'porygon2') {
+				set.species = 'porygon2';
+				set.name = 'Euphoric';
+			} else if (template.id === 'pumpkaboo') {
+				set.species = 'pumpkaboo';
+				set.name = 'Forever';
+			} else if (template.id === 'pupitar') {
+				set.species = 'pupitar';
+				set.name = 'KFCutman';
+				set.item = 'eviolite';
+				set.moves = ['outrage', 'rockpolish', 'dragondance', 'earthquake'];
+			} else if (template.id === 'raichu') {
+				set.species = 'raichu';
+				set.name = 'Livewire';
+			} else if (template.id === 'reshiram') {
+				set.species = 'reshiram';
+				set.name = 'Yet Another Logical Nerd';
+			} else if (template.id === 'reuniclus') {
+				set.species = 'reuniclus';
+				set.name = 'Dark Pit';
+			} else if (template.id === 'rhyperior') {
+				set.species = 'rhyperior';
+				set.name = 'Terra';
+				set.gender = 'M';
+				set.item = 'focussash';
+				set.ability = 'lightningrod';
+				set.moves = ['stoneedge', 'stealthrock', 'megahorn', 'avalanche'];
+				set.nature = 'jolly';
+				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
+			} else if (template.id === 'rotomfan') {
+				set.species = 'rotomfan';
+				set.name = 'littlebrother';
+				set.item = 'leftovers';
+				set.moves = ['discharge', 'painsplit', 'airslash', 'substitute'];
+			} else if (template.id === 'sableye') {
+				set.species = 'sableye';
+				set.name = 'srinator';
+				set.item = 'sablenite';
+				set.moves = ['willowisp', 'darkpulse', 'recover', 'calmmind'];
+			} else if (template.id === 'sandshrew') {
+				set.species = 'sandshrew';
+				set.name = 'Squirrel';
+			} else if (template.id === 'sceptile') {
+				set.species = 'sceptile';
+				set.name = 'Regeneration';
+			} else if (template.id === 'scolipede') {
+				set.species = 'scolipede';
+				set.name = 'Pendraflare';
+			} else if (template.id === 'scrafty') {
+				set.species = 'scrafty';
+				set.name = 'Atwilko';
+			} else if (template.id === 'serperior') {
+				set.species = 'serperior';
+				set.name = 'Nolafus';
+			} else if (template.id === 'shaymin') {
+				set.species = 'shaymin';
+				set.name = 'Zorua';
+			} else if (template.id === 'skarmory') {
+				set.species = 'skarmory';
+				set.name = 'nizo';
+			} else if (template.id === 'slowbro') {
+				set.species = 'slowbro';
+				set.name = '.Aero';
+			} else if (template.id === 'snivy') {
+				set.species = 'snivy';
+				set.name = 'Tsutarja';
+			} else if (template.id === 'spheal') {
+				set.species = 'spheal';
+				set.name = 'Christos';
+				set.moves = ['freezedry', 'surf', 'yawn', 'superfang'];
+			} else if (template.id === 'staraptor') {
+				set.species = 'staraptor';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'BadPokemon';
+					set.item = 'choiceband';
+					set.ability = 'reckless';
+					set.moves = ['doubleedge', 'quickattack', 'bravebird', 'closecombat'];
+					set.nature = 'adamant';
+				} else {
+					set.name = 'Rabinov';
+					set.item = 'leftovers';
+					set.ability = 'intimidate';
+					set.moves = ['bravebird', 'featherdance', 'roost', 'defog'];
+					set.nature = 'impish';
+					set.evs = {hp: 252, def: 176, spd: 0, spa: 0, atk: 0, spe: 80};
+				}
+			} else if (template.id === 'starmie') {
+				set.species = 'starmie';
+				set.name = 'shenanigans';
+			} else if (template.id === 'suicune') {
+				set.species = 'suicune';
+				set.name = 'wolf';
+			} else if (template.id === 'sylveon') {
+				set.species = 'sylveon';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'Harmonious Fusion';
+				} else {
+					set.name = 'pixie^.^forest';
+				}
+			} else if (template.id === 'tangela') {
+				set.species = 'tangela';
+				set.name = 'Yoshikko';
+				set.item = 'eviolite';
+				set.ability = 'regenerator';
+				set.moves = ['gigadrain', 'sleeppowder', 'leechseed', 'hiddenpowerfire'];
+				set.nature = 'bold';
+				set.evs = {hp: 252, def: 252, spd: 0, spa: 0, atk: 0, spe: 4};
+			} else if (template.id === 'togekiss') {
+				set.species = 'togekiss';
+				set.name = 'Aurora';
+			} else if (template.id === 'typhlosion') {
+				set.species = 'typhlosion';
+				set.name = 'ShadowE';
+			} else if (template.id === 'tyranitar') {
+				set.species = 'tyranitar';
+				set.name = 'dontstay96';
+			} else if (template.id === 'vaporeon') {
+				set.species = 'vaporeon';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'Eevee-kins';
+				} else {
+					set.name = 'Furoichi';
+					set.item = 'leftovers';
+					set.ability = 'waterabsorb';
+					set.moves = ['wish', 'protect', 'scald', 'batonpass'];
+					set.nature = 'calm';
+					set.evs = {hp: 200, def: 252, spd: 56, spa: 0, atk: 0, spe: 0};
+				}
+			} else if (template.id === 'venusaur') {
+				set.species = 'venusaur';
+				set.name = 'Garrabutártulo';
+			} else if (template.id === 'victini') {
+				set.species = 'victini';
+				set.name = 'Starry Windy';
+			} else if (template.id === 'volcarona') {
+				set.species = 'volcarona';
+				set.name = 'Lilith';
+			} else if (template.id === 'vulpix') {
+				set.species = 'vulpix';
+				set.name = 'Peitharchia';
+			} else if (template.id === 'whimsicott') {
+				set.species = 'whimsicott';
+				set.name = 'Sheep';
+			} else if (template.id === 'wigglytuff') {
+				set.species = 'wigglytuff';
+				set.name = 'White Mage';
+			} else if (template.id === 'zebstrika') {
+				set.species = 'zebstrika';
+				set.name = 'Vrai';
+			}
+
+			// Okay, the set passes, add it to our team
+			pokemon.push(set);
+
+			// Now that our Pokemon has passed all checks, we can increment our counters
+			pokemonLeft++;
+
+			// Increment type counters
+			for (var t = 0; t < types.length; t++) {
+				if (types[t] in typeCount) {
+					typeCount[types[t]]++;
+				} else {
+					typeCount[types[t]] = 1;
+				}
+			}
+			typeComboCount[typeCombo] = 1;
+
+			// Increment Uber/NU counters
+			if (tier === 'Uber') {
+				uberCount++;
+			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
+				puCount++;
+			}
+
+			// Increment mega and base species counters
+			if (isMegaSet) megaCount++;
+			baseFormes[template.baseSpecies] = 1;
+		}
+		return pokemon;
+	},
 	randomSpringTeam: function (side) {
 		var pokemonLeft = 0;
 		var pokemon = [];
@@ -4536,551 +5081,6 @@ exports.BattleScripts = {
 		}
 
 		return team;
-	},
-	randomCommunityTeam: function (side) {
-		var pokemonLeft = 0;
-		var pokemon = [];
-
-		var pokemonPool = ['absol', 'aerodactyl', 'arcanine', 'archeops', 'aromatisse', 'azelf', 'bellossom', 'bidoof', 'blissey', 'castform', 'celebi', 'charizard', 'cofagrigus', 'cradily', 'cresselia', 'crobat', 'cyndaquil', 'darkrai', 'dragonite', 'espurr', 'feraligatr', 'gallade', 'galvantula', 'garchomp', 'gardevoir', 'gengar', 'golurk', 'gourgeist', 'greninja', 'heracross', 'hydreigon', 'igglybuff', 'infernape', 'jynx', 'lapras', 'latias', 'latios', 'liepard', 'ludicolo', 'magikarp', 'magneton', 'magnezone', 'manectric', 'mantine', 'masquerain', 'mawile', 'meganium', 'metagross', 'mew', 'mewtwo', 'milotic', 'mismagius', 'missingno', 'mudkip', 'nidoking', 'oddish', 'oshawott', 'pachirisu', 'pichu', 'pidgey', 'pikachu', 'porygon2', 'pumpkaboo', 'pupitar', 'raichu', 'reshiram', 'reuniclus', 'rhyperior', 'rotomfan', 'sableye', 'sandshrew', 'sceptile', 'scolipede', 'scrafty', 'serperior', 'shaymin', 'skarmory', 'slowbro', 'snivy', 'spheal', 'staraptor', 'starmie', 'suicune', 'sylveon', 'tangela', 'togekiss', 'typhlosion', 'tyranitar', 'vaporeon', 'venusaur', 'victini', 'volcarona', 'vulpix', 'whimsicott', 'wigglytuff', 'zebstrika', 'zekrom'];
-
-
-		var typeCount = {};
-		var typeComboCount = {};
-		var baseFormes = {};
-		var uberCount = 0;
-		var puCount = 0;
-		var megaCount = 0;
-
-		while (pokemonPool.length && pokemonLeft < 6) {
-			var template = this.getTemplate(this.sampleNoReplace(pokemonPool));
-			if (!template.exists) continue;
-
-			// Limit to one of each species (Species Clause)
-			if (baseFormes[template.baseSpecies]) continue;
-
-			// Not available on ORAS
-			if (template.species === 'Pichu-Spiky-eared') continue;
-
-			var tier = template.tier;
-			switch (tier) {
-			case 'LC':
-			case 'LC Uber':
-			case 'NFE':
-				if (puCount > 1) continue;
-				break;
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'CAP':
-				// CAPs have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Unreleased':
-				// Unreleased Pokémon have 20% the normal rate
-				if (this.random(5) >= 1) continue;
-			}
-
-			// Adjust rate for species with multiple formes
-			switch (template.baseSpecies) {
-			case 'Arceus':
-				if (this.random(18) >= 1) continue;
-				break;
-			case 'Basculin':
-				if (this.random(2) >= 1) continue;
-				break;
-			case 'Genesect':
-				if (this.random(5) >= 1) continue;
-				break;
-			case 'Pumpkaboo':
-				if (this.random(4) >= 1) continue;
-				break;
-			case 'Gourgeist':
-				if (this.random(4) >= 1) continue;
-				break;
-			case 'Meloetta':
-				if (this.random(2) >= 1) continue;
-				break;
-			case 'Castform':
-				if (this.random(2) >= 1) continue;
-				break;
-			case 'Pikachu':
-				// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
-				if (template.species !== 'Pikachu' && this.random(30) >= 1) continue;
-			}
-
-			// Limit 2 of any type
-			var types = template.types;
-			var skip = false;
-			for (var t = 0; t < types.length; t++) {
-				if (typeCount[types[t]] > 1 && this.random(5) >= 1) {
-					skip = true;
-					break;
-				}
-			}
-			if (skip) continue;
-
-			var set = this.randomSet(template, pokemon.length, megaCount);
-
-			// Illusion shouldn't be on the last pokemon of the team
-			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
-
-			// Limit 1 of any type combination
-			var typeCombo = types.join();
-			if (set.ability === 'Drought' || set.ability === 'Drizzle') {
-				// Drought and Drizzle don't count towards the type combo limit
-				typeCombo = set.ability;
-			}
-			if (typeCombo in typeComboCount) continue;
-
-			// Limit the number of Megas to one
-			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
-			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
-			if (isMegaSet && megaCount > 0) continue;
-
-			if (template.id === 'absol') {
-				set.species = 'absol';
-				set.name = 'Sanguine';
-			} else if (template.id === 'aerodactyl') {
-				set.species = 'aerodactyl';
-				set.name = 'H.A.N.';
-			} else if (template.id === 'arcanine') {
-				set.species = 'arcanine';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'Aslan';
-				} else {
-					set.name = 'El Héroe';
-					set.item = 'lifeorb';
-					set.ability = 'flashfire';
-					set.moves = ['flareblitz', 'extremespeed', 'closecombat', 'crunch'];
-					set.nature = 'adamant';
-					set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
-				}
-			} else if (template.id === 'archeops') {
-				set.species = 'archeops';
-				set.name = 'Nightanglet';
-				set.moves = ['acrobatics', 'earthquake', 'aquatail', 'knockoff'];
-				set.nature = 'jolly';
-				set.evs = {hp: 0, def: 0, spd: 0, spa: 0, atk: 252, spe: 252};
-			} else if (template.id === 'aromatisse') {
-				set.species = 'aromatisse';
-				set.name = 'Wilhelm';
-			} else if (template.id === 'azelf') {
-				set.species = 'azelf';
-				set.name = 'Dark Azelf';
-			} else if (template.id === 'bellossom') {
-				set.species = 'bellossom';
-				set.name = 'Leijon';
-				set.gender = 'F';
-				set.moves = ['petaldance', 'attract', 'hiddenpowerfire', 'synthesis'];
-			} else if (template.id === 'bidoof') {
-				set.species = 'bidoof';
-				set.name = 'Lalapizzame';
-			} else if (template.id === 'blissey') {
-				set.species = 'blissey';
-				set.name = 'Sonata';
-				set.gender = 'F';
-				set.item = 'assaultvest';
-				set.ability = 'serenegrace';
-				set.moves = ['fireblast', 'thunder', 'blizzard', 'psychic'];
-				set.nature = 'modest';
-				set.evs = {hp: 4, def: 252, spd: 0, spa: 252, atk: 0, spe: 0};
-			} else if (template.id === 'castform') {
-				set.species = 'castform';
-				set.name = 'Powalen';
-			} else if (template.id === 'celebi') {
-				set.species = 'celebi';
-				set.name = 'R.F.';
-			} else if (template.id === 'charizard') {
-				set.species = 'charizard';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'IndianCharizard#';
-				} else {
-					set.name = 'Rukario';
-				}
-			} else if (template.id === 'cofagrigus') {
-				set.species = 'cofagrigus';
-				set.name = 'Zeffy';
-			} else if (template.id === 'cradily') {
-				set.species = 'cradily';
-				set.name = 'oocyst';
-				set.item = 'leftovers';
-				set.moves = ['curse', 'recover', 'rockslide', 'seedbomb'];
-				set.nature = 'careful';
-				set.evs = {hp: 252, def: 4, spd: 252, spa: 0, atk: 0, spe: 0};
-			} else if (template.id === 'cresselia') {
-				set.species = 'cresselia';
-				set.name = 'Sphealo';
-				set.item = 'lightclay';
-				set.ability = 'levitate';
-				set.moves = ['reflect', 'lightscreen', 'lunardance', 'moonblast'];
-				set.nature = 'timid';
-				set.evs = {hp: 252, def: 4, spd: 0, spa: 0, atk: 0, spe: 252};
-			} else if (template.id === 'crobat') {
-				set.species = 'crobat';
-				set.name = 'Timbjerr';
-			} else if (template.id === 'cyndaquil') {
-				set.species = 'cyndaquil';
-				set.name = 'Gallant192';
-			} else if (template.id === 'darkrai') {
-				set.species = 'darkrai';
-				set.name = 'Dark Light1999';
-				set.item = 'widelens';
-				set.ability = 'baddreams';
-				set.moves = ['darkvoid', 'darkpulse', 'dreameater', 'icebeam'];
-				set.nature = 'timid';
-				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'dragonite') {
-				set.species = 'dragonite';
-				set.name = 'Dark Shadow 6';
-			} else if (template.id === 'espurr') {
-				set.species = 'espurr';
-				set.name = 'machomuu';
-			} else if (template.id === 'feraligatr') {
-				set.species = 'feraligatr';
-				set.name = 'Jin Of The Gale';
-			} else if (template.id === 'gallade') {
-				set.species = 'gallade';
-				set.name = 'PlatinumDude';
-			} else if (template.id === 'galvantula') {
-				set.species = 'galvantula';
-				set.name = 'Synerjee';
-			} else if (template.id === 'garchomp') {
-				set.species = 'garchomp';
-				set.name = 'Exile';
-			} else if (template.id === 'gardevoir') {
-				set.species = 'gardevoir';
-				set.name = 'Jellicent♀';
-			} else if (template.id === 'gengar') {
-				set.species = 'gengar';
-				set.name = 'Spartacus';
-			} else if (template.id === 'golurk') {
-				set.species = 'golurk';
-				set.name = 'Sheerow';
-			} else if (template.id === 'gourgeist') {
-				set.species = 'gourgeist';
-				set.name = 'Flushed';
-			} else if (template.id === 'greninja') {
-				set.species = 'greninja';
-				set.name = 'Chocolate™';
-			} else if (template.id === 'heracross') {
-				set.species = 'heracross';
-				set.name = 'Jake♫';
-			} else if (template.id === 'hydreigon') {
-				set.species = 'hydreigon';
-				set.name = 'Overlord Drakow';
-			} else if (template.id === 'igglybuff') {
-				set.species = 'igglybuff';
-				set.name = '«Chuckles»';
-			} else if (template.id === 'infernape') {
-				set.species = 'infernape';
-				set.name = 'Nathan';
-			} else if (template.id === 'jynx') {
-				set.species = 'jynx';
-				set.name = 'mystletainn';
-			} else if (template.id === 'lapras') {
-				set.species = 'lapras';
-				set.name = 'Altairis';
-			} else if (template.id === 'latias') {
-				set.species = 'latias';
-				set.name = 'Sector';
-			} else if (template.id === 'latios') {
-				set.species = 'latios';
-				set.name = 'Retribution';
-			} else if (template.id === 'liepard') {
-				set.species = 'liepard';
-				set.name = 'Bruce Banner';
-			} else if (template.id === 'ludicolo') {
-				set.species = 'ludicolo';
-				set.name = 'Omicron';
-			} else if (template.id === 'magikarp') {
-				set.species = 'magikarp';
-				set.name = 'Clacla';
-			} else if (template.id === 'magneton') {
-				set.species = 'magneton';
-				set.name = 'Archer99';
-				set.item = 'choicespecs';
-				set.ability = 'magnetpull';
-				set.moves = ['thunderbolt', 'flashcannon', 'voltswitch', 'hiddenpowerfire'];
-				set.nature = 'modest';
-				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'magnezone') {
-				set.species = 'magnezone';
-				set.name = 'Archer99';
-			} else if (template.id === 'manectric') {
-				set.species = 'manectric';
-				set.name = 'antemortem';
-				set.item = 'manectite';
-				set.moves = ['voltswitch', 'thunderbolt', 'hiddenpowergrass', 'flamethrower'];
-			} else if (template.id === 'mantine') {
-				set.species = 'mantine';
-				set.name = 'Blu·Ray';
-			} else if (template.id === 'masquerain') {
-				set.species = 'masquerain';
-				set.name = 'stranger';
-			} else if (template.id === 'mawile') {
-				set.species = 'mawile';
-				set.name = 'revere';
-			} else if (template.id === 'meganium') {
-				set.species = 'meganium';
-				set.name = 'Axeliira';
-			} else if (template.id === 'metagross') {
-				set.species = 'metagross';
-				set.name = 'punkysaur';
-				set.moves[0] = 'meteormash';
-				set.moves[1] = 'bulletpunch';
-			} else if (template.id === 'mew') {
-				set.species = 'mew';
-				set.name = 'Rϵd';
-			} else if (template.id === 'mewtwo') {
-				set.species = 'mewtwo';
-				set.name = 'Dakota';
-			} else if (template.id === 'milotic') {
-				set.species = 'milotic';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'Dragon';
-				} else {
-					set.name = 'TGM';
-				}
-			} else if (template.id === 'mismagius') {
-				set.species = 'mismagius';
-				set.name = 'Polar Spectrum';
-				set.item = 'colburberry';
-				set.moves = ['willowisp', 'hex', 'nastyplot', 'powergem'];
-				set.nature = 'timid';
-				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'missingno') {
-				set.species = 'missingno';
-				set.name = 'King Syn';
-				set.item = 'lifeorb';
-				set.ability = 'simple';
-				set.moves = ['swordsdance', 'extremespeed', 'zenheadbutt', 'closecombat'];
-				set.nature = 'adamant';
-				set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
-			} else if (template.id === 'mudkip') {
-				set.species = 'mudkip';
-				set.name = 'Bidoof FTW';
-			} else if (template.id === 'nidoking') {
-				set.species = 'nidoking';
-				set.name = 'jdthebud';
-			} else if (template.id === 'oddish') {
-				set.species = 'oddish';
-				set.name = 'oddísh';
-				set.item = 'eviolite';
-				set.ability = 'chlorophyll';
-				set.moves = ['solarbeam', 'sludgebomb', 'sunnyday', 'sleeppowder'];
-				set.nature = 'timid';
-				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'oshawott') {
-				set.species = 'oshawott';
-				set.name = 'Hikamaru';
-			} else if (template.id === 'pachirisu') {
-				set.species = 'pachirisu';
-				set.name = 'Melody';
-				set.gender = 'F';
-				set.shiny = true;
-				set.moves[0] = 'attract';
-				set.moves[1] = 'nuzzle';
-			} else if (template.id === 'pichu') {
-				set.species = 'pichu';
-				set.name = 'Lost Christmas';
-				set.item = 'lifeorb';
-				set.moves = ['volttackle', 'grassknot', 'toxic', 'return'];
-			} else if (template.id === 'pidgey') {
-				set.species = 'pidgey';
-				set.name = 'Olli';
-			} else if (template.id === 'pikachu') {
-				set.species = 'pikachu';
-				set.name = 'Kaori';
-			} else if (template.id === 'porygon2') {
-				set.species = 'porygon2';
-				set.name = 'Euphoric';
-			} else if (template.id === 'pumpkaboo') {
-				set.species = 'pumpkaboo';
-				set.name = 'Forever';
-			} else if (template.id === 'pupitar') {
-				set.species = 'pupitar';
-				set.name = 'KFCutman';
-				set.item = 'eviolite';
-				set.moves = ['outrage', 'rockpolish', 'dragondance', 'earthquake'];
-			} else if (template.id === 'raichu') {
-				set.species = 'raichu';
-				set.name = 'Livewire';
-			} else if (template.id === 'reshiram') {
-				set.species = 'reshiram';
-				set.name = 'Yet Another Logical Nerd';
-			} else if (template.id === 'reuniclus') {
-				set.species = 'reuniclus';
-				set.name = 'Dark Pit';
-			} else if (template.id === 'rhyperior') {
-				set.species = 'rhyperior';
-				set.name = 'Terra';
-				set.gender = 'M';
-				set.item = 'focussash';
-				set.ability = 'lightningrod';
-				set.moves = ['stoneedge', 'stealthrock', 'megahorn', 'avalanche'];
-				set.nature = 'jolly';
-				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
-			} else if (template.id === 'rotomfan') {
-				set.species = 'rotomfan';
-				set.name = 'littlebrother';
-				set.item = 'leftovers';
-				set.moves = ['discharge', 'painsplit', 'airslash', 'substitute'];
-			} else if (template.id === 'sableye') {
-				set.species = 'sableye';
-				set.name = 'srinator';
-				set.item = 'sablenite';
-				set.moves = ['willowisp', 'darkpulse', 'recover', 'calmmind'];
-			} else if (template.id === 'sandshrew') {
-				set.species = 'sandshrew';
-				set.name = 'Squirrel';
-			} else if (template.id === 'sceptile') {
-				set.species = 'sceptile';
-				set.name = 'Regeneration';
-			} else if (template.id === 'scolipede') {
-				set.species = 'scolipede';
-				set.name = 'Pendraflare';
-			} else if (template.id === 'scrafty') {
-				set.species = 'scrafty';
-				set.name = 'Atwilko';
-			} else if (template.id === 'serperior') {
-				set.species = 'serperior';
-				set.name = 'Nolafus';
-			} else if (template.id === 'shaymin') {
-				set.species = 'shaymin';
-				set.name = 'Zorua';
-			} else if (template.id === 'skarmory') {
-				set.species = 'skarmory';
-				set.name = 'nizo';
-			} else if (template.id === 'slowbro') {
-				set.species = 'slowbro';
-				set.name = '.Aero';
-			} else if (template.id === 'snivy') {
-				set.species = 'snivy';
-				set.name = 'Tsutarja';
-			} else if (template.id === 'spheal') {
-				set.species = 'spheal';
-				set.name = 'Christos';
-				set.moves = ['freezedry', 'surf', 'yawn', 'superfang'];
-			} else if (template.id === 'staraptor') {
-				set.species = 'staraptor';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'BadPokemon';
-					set.item = 'choiceband';
-					set.ability = 'reckless';
-					set.moves = ['doubleedge', 'quickattack', 'bravebird', 'closecombat'];
-					set.nature = 'adamant';
-				} else {
-					set.name = 'Rabinov';
-					set.item = 'leftovers';
-					set.ability = 'intimidate';
-					set.moves = ['bravebird', 'featherdance', 'roost', 'defog'];
-					set.nature = 'impish';
-					set.evs = {hp: 252, def: 176, spd: 0, spa: 0, atk: 0, spe: 80};
-				}
-			} else if (template.id === 'starmie') {
-				set.species = 'starmie';
-				set.name = 'shenanigans';
-			} else if (template.id === 'suicune') {
-				set.species = 'suicune';
-				set.name = 'wolf';
-			} else if (template.id === 'sylveon') {
-				set.species = 'sylveon';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'Harmonious Fusion';
-				} else {
-					set.name = 'pixie^.^forest';
-				}
-			} else if (template.id === 'tangela') {
-				set.species = 'tangela';
-				set.name = 'Yoshikko';
-				set.item = 'eviolite';
-				set.ability = 'regenerator';
-				set.moves = ['gigadrain', 'sleeppowder', 'leechseed', 'hiddenpowerfire'];
-				set.nature = 'bold';
-				set.evs = {hp: 252, def: 252, spd: 0, spa: 0, atk: 0, spe: 4};
-			} else if (template.id === 'togekiss') {
-				set.species = 'togekiss';
-				set.name = 'Aurora';
-			} else if (template.id === 'typhlosion') {
-				set.species = 'typhlosion';
-				set.name = 'ShadowE';
-			} else if (template.id === 'tyranitar') {
-				set.species = 'tyranitar';
-				set.name = 'dontstay96';
-			} else if (template.id === 'vaporeon') {
-				set.species = 'vaporeon';
-				var dice = this.random(2);
-				if (dice < 1) {
-					set.name = 'Eevee-kins';
-				} else {
-					set.name = 'Furoichi';
-					set.item = 'leftovers';
-					set.ability = 'waterabsorb';
-					set.moves = ['wish', 'protect', 'scald', 'batonpass'];
-					set.nature = 'calm';
-					set.evs = {hp: 200, def: 252, spd: 56, spa: 0, atk: 0, spe: 0};
-				}
-			} else if (template.id === 'venusaur') {
-				set.species = 'venusaur';
-				set.name = 'Garrabutártulo';
-			} else if (template.id === 'victini') {
-				set.species = 'victini';
-				set.name = 'Starry Windy';
-			} else if (template.id === 'volcarona') {
-				set.species = 'volcarona';
-				set.name = 'Lilith';
-			} else if (template.id === 'vulpix') {
-				set.species = 'vulpix';
-				set.name = 'Peitharchia';
-			} else if (template.id === 'whimsicott') {
-				set.species = 'whimsicott';
-				set.name = 'Sheep';
-			} else if (template.id === 'wigglytuff') {
-				set.species = 'wigglytuff';
-				set.name = 'White Mage';
-			} else if (template.id === 'zebstrika') {
-				set.species = 'zebstrika';
-				set.name = 'Vrai';
-			}
-
-			// Okay, the set passes, add it to our team
-			pokemon.push(set);
-
-			// Now that our Pokemon has passed all checks, we can increment our counters
-			pokemonLeft++;
-
-			// Increment type counters
-			for (var t = 0; t < types.length; t++) {
-				if (types[t] in typeCount) {
-					typeCount[types[t]]++;
-				} else {
-					typeCount[types[t]] = 1;
-				}
-			}
-			typeComboCount[typeCombo] = 1;
-
-			// Increment Uber/NU counters
-			if (tier === 'Uber') {
-				uberCount++;
-			} else if (tier === 'PU' || tier === 'LC' || tier === 'LC Uber' || tier === 'NFE') {
-				puCount++;
-			}
-
-			// Increment mega and base species counters
-			if (isMegaSet) megaCount++;
-			baseFormes[template.baseSpecies] = 1;
-		}
-		return pokemon;
 	},
 	randomFurryTeam: function (side) {
 		var pokemonLeft = 0;
