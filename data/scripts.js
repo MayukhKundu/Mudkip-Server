@@ -3774,6 +3774,17 @@ exports.BattleScripts = {
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
+			if (template.id === 'wobbuffet') {
+				set.species = 'Wobbuffet';
+				set.ability = 'Telepathy';
+			} else if (template.id === 'ninetales') {
+				set.species = 'Ninetales';
+				set.ability = 'Flash Fire';
+			} else if (template.id === 'politoed') {
+				set.species = 'Politoed';
+				set.ability = 'Water Absorb';
+			}
+
 			// Illusion shouldn't be on the last pokemon of the team
 			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
 
@@ -3789,17 +3800,6 @@ exports.BattleScripts = {
 			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
 			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
 			if (isMegaSet && megaCount > 0) continue;
-
-			if (template.id === 'wobbuffet') {
-				set.species = 'wobbuffet';
-				set.ability = 'telepathy';
-			} else if (template.id === 'ninetales') {
-				set.species = 'ninetales';
-				set.ability = 'flashfire';
-			} else if (template.id === 'politoed') {
-				set.species = 'politoed';
-				set.ability = 'waterabsorb';
-			}
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
@@ -3916,6 +3916,8 @@ exports.BattleScripts = {
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
+			set.level = 5;
+
 			// Illusion shouldn't be on the last pokemon of the team
 			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
 
@@ -3931,8 +3933,6 @@ exports.BattleScripts = {
 			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
 			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
 			if (isMegaSet && megaCount > 0) continue;
-
-			set.level = 5;
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
@@ -4219,22 +4219,6 @@ exports.BattleScripts = {
 			if (skip) continue;
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
-
-			// Illusion shouldn't be on the last pokemon of the team
-			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
-
-			// Limit 1 of any type combination
-			var typeCombo = types.join();
-			if (set.ability === 'Drought' || set.ability === 'Drizzle') {
-				// Drought and Drizzle don't count towards the type combo limit
-				typeCombo = set.ability;
-			}
-			if (typeCombo in typeComboCount) continue;
-
-			// Limit the number of Megas to one
-			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
-			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
-			if (isMegaSet && megaCount > 0) continue;
 
 			if (template.id === 'absol') {
 				set.species = 'absol';
@@ -4646,6 +4630,22 @@ exports.BattleScripts = {
 				set.species = 'zebstrika';
 				set.name = 'Vrai';
 			}
+
+			// Illusion shouldn't be on the last pokemon of the team
+			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
+
+			// Limit 1 of any type combination
+			var typeCombo = types.join();
+			if (set.ability === 'Drought' || set.ability === 'Drizzle') {
+				// Drought and Drizzle don't count towards the type combo limit
+				typeCombo = set.ability;
+			}
+			if (typeCombo in typeComboCount) continue;
+
+			// Limit the number of Megas to one
+			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
+			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
+			if (isMegaSet && megaCount > 0) continue;
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
@@ -5477,6 +5477,14 @@ exports.BattleScripts = {
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
+			if (template.id === 'purrloin') {
+				set.item = 'Leftovers';
+				set.moves = ['Foul Play', 'Swagger', 'Substitute', 'Thunder Wave'];
+			} else if (template.id === 'liepard') {
+				set.item = 'Leftovers';
+				set.moves = ['Foul Play', 'Swagger', 'Substitute', 'Thunder Wave'];
+			}
+
 			// Illusion shouldn't be on the last pokemon of the team
 			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
 
@@ -5492,14 +5500,6 @@ exports.BattleScripts = {
 			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
 			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
 			if (isMegaSet && megaCount > 0) continue;
-
-			if (template.id === 'purrloin') {
-				set.item = 'leftovers';
-				set.moves = ['foulplay', 'swagger', 'substitute', 'thunderwave'];
-			} else if (template.id === 'liepard') {
-				set.item = 'leftovers';
-				set.moves = ['foulplay', 'swagger', 'substitute', 'thunderwave'];
-			}
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
