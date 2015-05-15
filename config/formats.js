@@ -324,15 +324,15 @@ exports.Formats = [
 			delete this.weatherData.duration;
 		},
 		onSwitchIn: function(pokemon, target, move) {
-			if (pokemon.template.species === 'Moltres' || pokemon.template.species === 'Ho-Oh' || pokemon.template.species === 'Groudon') {
+			if (pokemon.template.species === 'Moltres' || pokemon.template.species === 'Ho-Oh' || pokemon.template.species === 'Groudon' || pokemon.template.species === 'Groudon-Primal') {
 				this.setWeather('Sunny Day');
 				delete this.weatherData.duration;
 			}
-			if (pokemon.template.species === 'Zapdos' || pokemon.template.species === 'Kyogre' || pokemon.template.species === 'Tornadus' || pokemon.template.species === 'Tornadus-Therian' || pokemon.template.species === 'Thundurus' || pokemon.template.species === 'Thundurus-Therian') {
+			if (pokemon.template.species === 'Zapdos' || pokemon.template.species === 'Kyogre' || pokemon.template.species === 'Kyogre-Primal' || pokemon.template.species === 'Tornadus' || pokemon.template.species === 'Tornadus-Therian' || pokemon.template.species === 'Thundurus' || pokemon.template.species === 'Thundurus-Therian') {
 				this.setWeather('Rain Dance');
 				delete this.weatherData.duration;
 			}
-			if (pokemon.template.species === 'Lugia' || pokemon.template.species === 'Altaria' || pokemon.template.species === 'Altaria-Mega' || pokemon.template.species === 'Rayquaza' || pokemon.template.species === 'Landorus' || pokemon.template.species === 'Landorus-Therian') {
+			if (pokemon.template.species === 'Lugia' || pokemon.template.species === 'Altaria' || pokemon.template.species === 'Altaria-Mega' || pokemon.template.species === 'Rayquaza' || pokemon.template.species === 'Rayquaza-Mega' || pokemon.template.species === 'Landorus' || pokemon.template.species === 'Landorus-Therian') {
 				this.clearWeather();
 			}
 		},
