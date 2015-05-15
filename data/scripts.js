@@ -5107,19 +5107,6 @@ exports.BattleScripts = {
 
 			var tier = template.tier;
 			switch (tier) {
-			case 'LC':
-			case 'LC Uber':
-			case 'NFE':
-				if (puCount > 1) continue;
-				break;
-			case 'PU':
-				// PUs are limited to 2 but have a 20% chance of being added anyway.
-				if (puCount > 1 && this.random(5) >= 1) continue;
-				break;
-			case 'Uber':
-				// Ubers are limited to 2 but have a 20% chance of being added anyway.
-				if (uberCount > 1 && this.random(5) >= 1) continue;
-				break;
 			case 'CAP':
 				// CAPs have 20% the normal rate
 				if (this.random(5) >= 1) continue;
