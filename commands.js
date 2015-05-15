@@ -825,11 +825,11 @@ var commands = exports.commands = {
 	ascii: function (target, room, user) {
 		if (!target) return;
 		if (!this.canBroadcast()) return;
-		var oldVersion = target;
+		var originalVersion = target;
 		var newVersion = target;
-		newVersion = newVersion.replace(/[^\x00-\x7F]/g, "");
+		newVersion = newVersion.replace(/[^\x00-\x7F]/g, "?");
 		this.sendReplyBox(
-			"Old version: " + oldVersion + "<br />" +
+			"Original version: " + originalVersion + "<br />" +
 			"ASCII-only version: " + newVersion
 		);
 	},
