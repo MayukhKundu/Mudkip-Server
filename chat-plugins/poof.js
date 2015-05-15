@@ -75,7 +75,7 @@ exports.commands = {
 		if (!this.canTalk(message)) return false;
 		var userid = user.name
 		userid = userid.replace(/[^\x00-\x7F]/g, "");
-		if (userid.toUpperCase() === 'WOLF' || userid.toUpperCase() === 'SMUS RN') {
+		if (userid.toUpperCase() === 'WOLF') {
 			var message = target || wolf[Math.floor(Math.random() * wolf.length)];
 			if (message.indexOf('{{user}}') < 0)
 				message = '{{user}} ' + message;
