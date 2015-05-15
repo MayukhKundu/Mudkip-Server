@@ -1417,9 +1417,9 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"<b>~ Administrators</b><br />" +
-			"- Anti (Crazy Uncle Anti)<br />" +
+			"- Anti (Papa Anti)<br />" +
 			"- Ausaudriel (Audy)<br />" +
-			"- Castform (Chase, orb castform, Powalen)<br />" +
+			"- Castform (Chase, Chaseform, orb castform, Powalen)<br />" +
 			"- Hiroshi Sotomura (Sotomura, Sotomura606)<br />" +
 			"- Lilith (TitanBlade, TwilightBlade)<br />" +
 			"- Livewire<br />" +
