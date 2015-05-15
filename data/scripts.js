@@ -4221,61 +4221,61 @@ exports.BattleScripts = {
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
 			if (template.id === 'absol') {
-				set.species = 'absol';
+				set.species = 'Absol';
 				set.name = 'Sanguine';
 			} else if (template.id === 'aerodactyl') {
-				set.species = 'aerodactyl';
+				set.species = 'Aerodactyl';
 				set.name = 'H.A.N.';
 			} else if (template.id === 'arcanine') {
-				set.species = 'arcanine';
+				set.species = 'Arcanine';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'Aslan';
 				} else {
 					set.name = 'El Héroe';
-					set.item = 'lifeorb';
-					set.ability = 'flashfire';
-					set.moves = ['flareblitz', 'extremespeed', 'closecombat', 'crunch'];
-					set.nature = 'adamant';
+					set.item = 'Life Orb';
+					set.ability = 'Flash Fire';
+					set.moves = ['Flare Blitz', 'Extreme Speed', 'Close Combat', 'Crunch'];
+					set.nature = 'Adamant';
 					set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
 				}
 			} else if (template.id === 'archeops') {
-				set.species = 'archeops';
+				set.species = 'Archeops';
 				set.name = 'Nightanglet';
-				set.moves = ['acrobatics', 'earthquake', 'aquatail', 'knockoff'];
-				set.nature = 'jolly';
+				set.moves = ['Acrobatics', 'Earthquake', 'Aqua Tail', 'Knock Off'];
+				set.nature = 'Jolly';
 				set.evs = {hp: 0, def: 0, spd: 0, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'aromatisse') {
-				set.species = 'aromatisse';
+				set.species = 'Aromatisse';
 				set.name = 'Wilhelm';
 			} else if (template.id === 'azelf') {
-				set.species = 'azelf';
+				set.species = 'Azelf';
 				set.name = 'Dark Azelf';
 			} else if (template.id === 'bellossom') {
-				set.species = 'bellossom';
+				set.species = 'Bellossom';
 				set.name = 'Leijon';
 				set.gender = 'F';
-				set.moves = ['petaldance', 'attract', 'hiddenpowerfire', 'synthesis'];
+				set.moves = ['Petal Dance', 'Attract', 'Hidden Power Fire', 'Synthesis'];
 			} else if (template.id === 'bidoof') {
-				set.species = 'bidoof';
+				set.species = 'Bidoof';
 				set.name = 'Lalapizzame';
 			} else if (template.id === 'blissey') {
-				set.species = 'blissey';
+				set.species = 'Blissey';
 				set.name = 'Sonata';
 				set.gender = 'F';
-				set.item = 'assaultvest';
-				set.ability = 'serenegrace';
-				set.moves = ['fireblast', 'thunder', 'blizzard', 'psychic'];
-				set.nature = 'modest';
+				set.item = 'Assault Vest';
+				set.ability = 'Serene Grace';
+				set.moves = ['Fire Blast', 'Thunder', 'Blizzard', 'Psychic'];
+				set.nature = 'Modest';
 				set.evs = {hp: 4, def: 252, spd: 0, spa: 252, atk: 0, spe: 0};
 			} else if (template.id === 'castform') {
-				set.species = 'castform';
+				set.species = 'Castform';
 				set.name = 'Powalen';
 			} else if (template.id === 'celebi') {
-				set.species = 'celebi';
+				set.species = 'Celebi';
 				set.name = 'R.F.';
 			} else if (template.id === 'charizard') {
-				set.species = 'charizard';
+				set.species = 'Charizard';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'IndianCharizard#';
@@ -4291,39 +4291,39 @@ exports.BattleScripts = {
 				set.nature = 'Impish';
 				set.evs = {hp: 252, def: 252, spd: 4, spa: 0, atk: 0, spe: 0};
 			} else if (template.id === 'cofagrigus') {
-				set.species = 'cofagrigus';
+				set.species = 'Cofagrigus';
 				set.name = 'Zeffy';
 			} else if (template.id === 'cradily') {
-				set.species = 'cradily';
+				set.species = 'Cradily';
 				set.name = 'oocyst';
-				set.item = 'leftovers';
-				set.moves = ['curse', 'recover', 'rockslide', 'seedbomb'];
-				set.nature = 'careful';
+				set.item = 'Leftovers';
+				set.moves = ['Curse', 'Recover', 'Rock Slide', 'Seed Bomb'];
+				set.nature = 'Careful';
 				set.evs = {hp: 252, def: 4, spd: 252, spa: 0, atk: 0, spe: 0};
 			} else if (template.id === 'cresselia') {
-				set.species = 'cresselia';
+				set.species = 'Cresselia';
 				set.name = 'Sphealo';
-				set.item = 'lightclay';
-				set.ability = 'levitate';
-				set.moves = ['reflect', 'lightscreen', 'lunardance', 'moonblast'];
-				set.nature = 'timid';
+				set.item = 'Light Clay';
+				set.ability = 'Levitate';
+				set.moves = ['Reflect', 'Light Screen', 'Lunar Dance', 'Moonblast'];
+				set.nature = 'Timid';
 				set.evs = {hp: 252, def: 4, spd: 0, spa: 0, atk: 0, spe: 252};
 			} else if (template.id === 'crobat') {
-				set.species = 'crobat';
+				set.species = 'Crobat';
 				set.name = 'Timbjerr';
 			} else if (template.id === 'cyndaquil') {
-				set.species = 'cyndaquil';
+				set.species = 'Cyndaquil';
 				set.name = 'Gallant192';
 			} else if (template.id === 'darkrai') {
-				set.species = 'darkrai';
+				set.species = 'Darkrai';
 				set.name = 'Dark Light1999';
-				set.item = 'widelens';
-				set.ability = 'baddreams';
-				set.moves = ['darkvoid', 'darkpulse', 'dreameater', 'icebeam'];
-				set.nature = 'timid';
+				set.item = 'Wide Lens';
+				set.ability = 'Bad Dreams';
+				set.moves = ['Dark Void', 'Dark Pulse', 'Dream Eater', 'Ice Beam'];
+				set.nature = 'Timid';
 				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
 			} else if (template.id === 'dragonite') {
-				set.species = 'dragonite';
+				set.species = 'Dragonite';
 				set.name = 'Dark Shadow 6';
 			} else if (template.id === 'emboar') {
 				set.item = 'Choice Scarf';
@@ -4332,16 +4332,16 @@ exports.BattleScripts = {
 				set.nature = 'Jolly';
 				set.evs = {hp: 4, def: 0, spd: 0, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'espurr') {
-				set.species = 'espurr';
+				set.species = 'Espurr';
 				set.name = 'machomuu';
 			} else if (template.id === 'feraligatr') {
-				set.species = 'feraligatr';
+				set.species = 'Feraligatr';
 				set.name = 'Jin Of The Gale';
 			} else if (template.id === 'gallade') {
-				set.species = 'gallade';
+				set.species = 'Gallade';
 				set.name = 'PlatinumDude';
 			} else if (template.id === 'galvantula') {
-				set.species = 'galvantula';
+				set.species = 'Galvantula';
 				set.name = 'Synerjee';
 			} else if (template.id === 'garchomp') {
 				set.species = 'Garchomp';
@@ -4357,31 +4357,31 @@ exports.BattleScripts = {
 					set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
 				}
 			} else if (template.id === 'gardevoir') {
-				set.species = 'gardevoir';
+				set.species = 'Gardevoir';
 				set.name = 'Jellicent♀';
 			} else if (template.id === 'gengar') {
-				set.species = 'gengar';
+				set.species = 'Gengar';
 				set.name = 'Spartacus';
 			} else if (template.id === 'golurk') {
-				set.species = 'golurk';
+				set.species = 'Golurk';
 				set.name = 'Sheerow';
 			} else if (template.id === 'gourgeist') {
-				set.species = 'gourgeist';
+				set.species = 'Gourgeist';
 				set.name = 'Flushed';
 			} else if (template.id === 'greninja') {
-				set.species = 'greninja';
+				set.species = 'Greninja';
 				set.name = 'Chocolate™';
 			} else if (template.id === 'heracross') {
-				set.species = 'heracross';
+				set.species = 'Heracross';
 				set.name = 'Jake♫';
 			} else if (template.id === 'hydreigon') {
-				set.species = 'hydreigon';
+				set.species = 'Hydreigon';
 				set.name = 'Overlord Drakow';
 			} else if (template.id === 'igglybuff') {
-				set.species = 'igglybuff';
+				set.species = 'Igglybuff';
 				set.name = '«Chuckles»';
 			} else if (template.id === 'infernape') {
-				set.species = 'infernape';
+				set.species = 'Infernape';
 				set.name = 'Nathan';
 			} else if (template.id === 'jellicent') {
 				set.species = 'Jellicent';
@@ -4400,53 +4400,50 @@ exports.BattleScripts = {
 				set.nature = 'Sassy';
 				set.evs = {hp: 252, def: 0, spd: 0, spa: 252, atk: 4, spe: 0};
 			} else if (template.id === 'jynx') {
-				set.species = 'jynx';
+				set.species = 'Jynx';
 				set.name = 'mystletainn';
 			} else if (template.id === 'lapras') {
-				set.species = 'lapras';
+				set.species = 'Lapras';
 				set.name = 'Altairis';
 			} else if (template.id === 'latias') {
-				set.species = 'latias';
+				set.species = 'Latias';
 				set.name = 'Sector';
 			} else if (template.id === 'latios') {
-				set.species = 'latios';
+				set.species = 'Latios';
 				set.name = 'Retribution';
 			} else if (template.id === 'liepard') {
-				set.species = 'liepard';
+				set.species = 'Liepard';
 				set.name = 'Bruce Banner';
 			} else if (template.id === 'ludicolo') {
-				set.species = 'ludicolo';
+				set.species = 'Ludicolo';
 				set.name = 'Omicron';
 			} else if (template.id === 'magikarp') {
-				set.species = 'magikarp';
+				set.species = 'Magikarp';
 				set.name = 'Clacla';
 			} else if (template.id === 'magneton') {
-				set.species = 'magneton';
+				set.species = 'Magneton';
 				set.name = 'Archer99';
-				set.item = 'choicespecs';
-				set.ability = 'magnetpull';
-				set.moves = ['thunderbolt', 'flashcannon', 'voltswitch', 'hiddenpowerfire'];
-				set.nature = 'modest';
+				set.item = 'Choice Specs';
+				set.ability = 'Magnet Pull';
+				set.moves = ['Thunderbolt', 'Flash Cannon', 'Volt Switch', 'Hidden Power Fire'];
+				set.nature = 'Modest';
 				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'magnezone') {
-				set.species = 'magnezone';
-				set.name = 'Archer99';
 			} else if (template.id === 'manectric') {
-				set.species = 'manectric';
+				set.species = 'Manectric';
 				set.name = 'antemortem';
-				set.item = 'manectite';
-				set.moves = ['voltswitch', 'thunderbolt', 'hiddenpowergrass', 'flamethrower'];
+				set.item = 'Manectite';
+				set.moves = ['Volt Switch', 'Thunderbolt', 'Hidden Power Grass', 'Flamethrower'];
 			} else if (template.id === 'mantine') {
-				set.species = 'mantine';
+				set.species = 'Mantine';
 				set.name = 'Blu·Ray';
 			} else if (template.id === 'masquerain') {
-				set.species = 'masquerain';
+				set.species = 'Masquerain';
 				set.name = 'stranger';
 			} else if (template.id === 'mawile') {
-				set.species = 'mawile';
+				set.species = 'Mawile';
 				set.name = 'revere';
 			} else if (template.id === 'meganium') {
-				set.species = 'meganium';
+				set.species = 'Meganium';
 				set.name = 'Axeliira';
 			} else if (template.id === 'metagross') {
 				set.species = 'Metagross';
@@ -4463,13 +4460,13 @@ exports.BattleScripts = {
 				set.nature = 'Jolly';
 				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'mew') {
-				set.species = 'mew';
+				set.species = 'Mew';
 				set.name = 'Rϵd';
 			} else if (template.id === 'mewtwo') {
-				set.species = 'mewtwo';
+				set.species = 'Mewtwo';
 				set.name = 'Dakota';
 			} else if (template.id === 'milotic') {
-				set.species = 'milotic';
+				set.species = 'Milotic';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'Dragon';
@@ -4477,88 +4474,88 @@ exports.BattleScripts = {
 					set.name = 'TGM';
 				}
 			} else if (template.id === 'mismagius') {
-				set.species = 'mismagius';
+				set.species = 'Mismagius';
 				set.name = 'Polar Spectrum';
-				set.item = 'colburberry';
-				set.moves = ['willowisp', 'hex', 'nastyplot', 'powergem'];
-				set.nature = 'timid';
+				set.item = 'Colbur Berry';
+				set.moves = ['Will-O-Wisp', 'Hex', 'Nasty Plot', 'Power Gem'];
+				set.nature = 'Timid';
 				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
 			} else if (template.id === 'mudkip') {
-				set.species = 'mudkip';
+				set.species = 'Mudkip';
 				set.name = 'Bidoof FTW';
 			} else if (template.id === 'nidoking') {
-				set.species = 'nidoking';
+				set.species = 'Nidoking';
 				set.name = 'jdthebud';
 			} else if (template.id === 'oddish') {
-				set.species = 'oddish';
+				set.species = 'Oddish';
 				set.name = 'oddísh';
-				set.item = 'eviolite';
-				set.ability = 'chlorophyll';
-				set.moves = ['solarbeam', 'sludgebomb', 'sunnyday', 'sleeppowder'];
-				set.nature = 'timid';
+				set.item = 'Eviolite';
+				set.ability = 'Chlorophyll';
+				set.moves = ['Solar Beam', 'Sludge Bomb', 'Sunny Day', 'Sleep Powder'];
+				set.nature = 'Timid';
 				set.evs = {hp: 4, def: 0, spd: 0, spa: 252, atk: 0, spe: 252};
 			} else if (template.id === 'oshawott') {
-				set.species = 'oshawott';
+				set.species = 'Oshawott';
 				set.name = 'Hikamaru';
 			} else if (template.id === 'pachirisu') {
-				set.species = 'pachirisu';
+				set.species = 'Pachirisu';
 				set.name = 'Melody';
 				set.gender = 'F';
 				set.shiny = true;
-				set.moves[0] = 'attract';
-				set.moves[1] = 'nuzzle';
+				set.moves[0] = 'Attract';
+				set.moves[1] = 'Nuzzle';
 			} else if (template.id === 'pichu') {
 				set.species = 'pichu';
 				set.name = 'Lost Christmas';
-				set.item = 'lifeorb';
-				set.moves = ['volttackle', 'grassknot', 'toxic', 'return'];
+				set.item = 'Life Orb';
+				set.moves = ['Volt Tackle', 'Grass Knot', 'Toxic', 'Return'];
 			} else if (template.id === 'pidgey') {
-				set.species = 'pidgey';
+				set.species = 'Pidgey';
 				set.name = 'Olli';
 			} else if (template.id === 'pikachu') {
-				set.species = 'pikachu';
+				set.species = 'Pikachu';
 				set.name = 'Kaori';
 			} else if (template.id === 'porygon2') {
-				set.species = 'porygon2';
+				set.species = 'Porygon2';
 				set.name = 'Euphoric';
 			} else if (template.id === 'pumpkaboo') {
-				set.species = 'pumpkaboo';
+				set.species = 'Pumpkaboo';
 				set.name = 'Forever';
 			} else if (template.id === 'pupitar') {
-				set.species = 'pupitar';
+				set.species = 'Pupitar';
 				set.name = 'KFCutman';
-				set.item = 'eviolite';
-				set.moves = ['outrage', 'rockpolish', 'dragondance', 'earthquake'];
+				set.item = 'Eviolite';
+				set.moves = ['Outrage', 'Rock Polish', 'Dragon Dance', 'Earthquake'];
 			} else if (template.id === 'raichu') {
-				set.species = 'raichu';
+				set.species = 'Raichu';
 				set.name = 'Livewire';
 			} else if (template.id === 'reshiram') {
-				set.species = 'reshiram';
+				set.species = 'Reshiram';
 				set.name = 'Yet Another Logical Nerd';
 			} else if (template.id === 'reuniclus') {
-				set.species = 'reuniclus';
+				set.species = 'Reuniclus';
 				set.name = 'Dark Pit';
 			} else if (template.id === 'rhyperior') {
-				set.species = 'rhyperior';
+				set.species = 'Rhyperior';
 				set.name = 'Terra';
 				set.gender = 'M';
-				set.item = 'focussash';
-				set.ability = 'lightningrod';
-				set.moves = ['stoneedge', 'stealthrock', 'megahorn', 'avalanche'];
-				set.nature = 'jolly';
+				set.item = 'Focus Sash';
+				set.ability = 'Lightning Rod';
+				set.moves = ['Stone Edge', 'Stealth Rock', 'Megahorn', 'Avalanche'];
+				set.nature = 'Jolly';
 				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'rotomfan') {
-				set.species = 'rotomfan';
+				set.species = 'Rotom-Fan';
 				set.name = 'littlebrother';
-				set.item = 'leftovers';
-				set.moves = ['discharge', 'painsplit', 'airslash', 'substitute'];
+				set.item = 'Leftovers';
+				set.moves = ['Discharge', 'Pain Split', 'Air Slash', 'Substitute'];
 			} else if (template.id === 'sableye') {
-				set.species = 'sableye';
+				set.species = 'Sableye';
 				set.name = 'srinator';
-				set.item = 'sablenite';
-				set.moves = ['willowisp', 'darkpulse', 'recover', 'calmmind'];
+				set.item = 'Sablenite';
+				set.moves = ['Will-O-Wisp', 'Dark Pulse', 'Recover', 'Calm Mind'];
 			} else if (template.id === 'sandshrew') {
-				set.species = 'sandshrew';
+				set.species = 'Sandshrew';
 				set.name = 'Squirrel';
 			} else if (template.id === 'sandslash') {
 				set.species = 'Sandslash';
@@ -4568,58 +4565,58 @@ exports.BattleScripts = {
 				set.moves = ['Earthquake', 'Rock Tomb', 'Poison Jab', 'Chip Away'];
 				set.evs = {hp: 0, def: 0, spd: 252, spa: 0, atk: 252, spe: 4};
 			} else if (template.id === 'sceptile') {
-				set.species = 'sceptile';
+				set.species = 'Sceptile';
 				set.name = 'Regeneration';
 			} else if (template.id === 'scolipede') {
-				set.species = 'scolipede';
+				set.species = 'Scolipede';
 				set.name = 'Pendraflare';
 			} else if (template.id === 'scrafty') {
-				set.species = 'scrafty';
+				set.species = 'Scrafty';
 				set.name = 'Atwilko';
 			} else if (template.id === 'serperior') {
-				set.species = 'serperior';
+				set.species = 'Serperior';
 				set.name = 'Nolafus';
 			} else if (template.id === 'shaymin') {
-				set.species = 'shaymin';
+				set.species = 'Shaymin';
 				set.name = 'Zorua';
 			} else if (template.id === 'skarmory') {
-				set.species = 'skarmory';
+				set.species = 'Skarmory';
 				set.name = 'nizo';
 			} else if (template.id === 'slowbro') {
-				set.species = 'slowbro';
+				set.species = 'Slowbro';
 				set.name = '.Aero';
 			} else if (template.id === 'snivy') {
-				set.species = 'snivy';
+				set.species = 'Snivy';
 				set.name = 'Tsutarja';
 			} else if (template.id === 'spheal') {
-				set.species = 'spheal';
+				set.species = 'Spheal';
 				set.name = 'Christos';
-				set.moves = ['freezedry', 'surf', 'yawn', 'superfang'];
+				set.moves = ['Freeze-Dry', 'Surf', 'Yawn', 'Super Fang'];
 			} else if (template.id === 'staraptor') {
-				set.species = 'staraptor';
+				set.species = 'Staraptor';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'BadPokemon';
-					set.item = 'choiceband';
-					set.ability = 'reckless';
-					set.moves = ['doubleedge', 'quickattack', 'bravebird', 'closecombat'];
-					set.nature = 'adamant';
+					set.item = 'Choice Band';
+					set.ability = 'Reckless';
+					set.moves = ['Double-Edge', 'Quick Attack', 'Brave Bird', 'Close Combat'];
+					set.nature = 'Adamant';
 				} else {
 					set.name = 'Rabinov';
-					set.item = 'leftovers';
-					set.ability = 'intimidate';
-					set.moves = ['bravebird', 'featherdance', 'roost', 'defog'];
-					set.nature = 'impish';
+					set.item = 'Leftovers';
+					set.ability = 'Intimidate';
+					set.moves = ['Brave Bird', 'Feather Dance', 'Roost', 'Defog'];
+					set.nature = 'Impish';
 					set.evs = {hp: 252, def: 176, spd: 0, spa: 0, atk: 0, spe: 80};
 				}
 			} else if (template.id === 'starmie') {
-				set.species = 'starmie';
+				set.species = 'Starmie';
 				set.name = 'shenanigans';
 			} else if (template.id === 'suicune') {
-				set.species = 'suicune';
+				set.species = 'Suicune';
 				set.name = 'wolf';
 			} else if (template.id === 'sylveon') {
-				set.species = 'sylveon';
+				set.species = 'Sylveon';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'Harmonious Fusion';
@@ -4627,55 +4624,55 @@ exports.BattleScripts = {
 					set.name = 'pixie^.^forest';
 				}
 			} else if (template.id === 'tangela') {
-				set.species = 'tangela';
+				set.species = 'Tangela';
 				set.name = 'Yoshikko';
-				set.item = 'eviolite';
-				set.ability = 'regenerator';
-				set.moves = ['gigadrain', 'sleeppowder', 'leechseed', 'hiddenpowerfire'];
-				set.nature = 'bold';
+				set.item = 'Eviolite';
+				set.ability = 'Regenerator';
+				set.moves = ['Giga Drain', 'Sleep Powder', 'Leech Seed', 'Hidden Power Fire'];
+				set.nature = 'Bold';
 				set.evs = {hp: 252, def: 252, spd: 0, spa: 0, atk: 0, spe: 4};
 			} else if (template.id === 'togekiss') {
-				set.species = 'togekiss';
+				set.species = 'Togekiss';
 				set.name = 'Aurora';
 			} else if (template.id === 'typhlosion') {
-				set.species = 'typhlosion';
+				set.species = 'Typhlosion';
 				set.name = 'ShadowE';
 			} else if (template.id === 'tyranitar') {
-				set.species = 'tyranitar';
+				set.species = 'Tyranitar';
 				set.name = 'dontstay96';
 			} else if (template.id === 'vaporeon') {
-				set.species = 'vaporeon';
+				set.species = 'Vaporeon';
 				var dice = this.random(2);
 				if (dice < 1) {
 					set.name = 'Eevee-kins';
 				} else {
 					set.name = 'Furoichi';
-					set.item = 'leftovers';
-					set.ability = 'waterabsorb';
-					set.moves = ['wish', 'protect', 'scald', 'batonpass'];
-					set.nature = 'calm';
+					set.item = 'Leftovers';
+					set.ability = 'Water Absorb';
+					set.moves = ['Wish', 'Protect', 'Scald', 'Baton Pass'];
+					set.nature = 'Calm';
 					set.evs = {hp: 200, def: 252, spd: 56, spa: 0, atk: 0, spe: 0};
 				}
 			} else if (template.id === 'venusaur') {
-				set.species = 'venusaur';
+				set.species = 'Venusaur';
 				set.name = 'Garrabutártulo';
 			} else if (template.id === 'victini') {
-				set.species = 'victini';
+				set.species = 'Victini';
 				set.name = 'Starry Windy';
 			} else if (template.id === 'volcarona') {
-				set.species = 'volcarona';
+				set.species = 'Volcarona';
 				set.name = 'Lilith';
 			} else if (template.id === 'vulpix') {
-				set.species = 'vulpix';
+				set.species = 'Vulpix';
 				set.name = 'Peitharchia';
 			} else if (template.id === 'whimsicott') {
-				set.species = 'whimsicott';
+				set.species = 'Whimsicott';
 				set.name = 'Sheep';
 			} else if (template.id === 'wigglytuff') {
-				set.species = 'wigglytuff';
+				set.species = 'Wigglytuff';
 				set.name = 'White Mage';
 			} else if (template.id === 'zebstrika') {
-				set.species = 'zebstrika';
+				set.species = 'Zebstrika';
 				set.name = 'Vrai';
 			}
 
