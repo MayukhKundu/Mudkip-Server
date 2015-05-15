@@ -673,16 +673,16 @@ exports.Formats = [
 		section: "Random Battles (aka Randbats)",
 
 		team: 'randomCC',
-		ruleset: ['HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
 	},
 	{
 		name: "Doubles Challenge Cup",
-		section: 'Random Battles (aka Randbats)',
+		section: "Random Battles (aka Randbats)",
 
 		gameType: 'doubles',
 		team: 'randomCC',
 		searchShow: false,
-		ruleset: ['HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
 	},
 	{
 		name: "Triples Challenge Cup",
@@ -691,7 +691,7 @@ exports.Formats = [
 		gameType: 'triples',
 		team: 'randomCC',
 		searchShow: false,
-		ruleset: ['HP Percentage Mod', 'Cancel Mod']
+		ruleset: ['Pokemon', 'HP Percentage Mod', 'Cancel Mod']
 	},
 
 	// XY Doubles
