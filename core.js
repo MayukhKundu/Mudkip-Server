@@ -73,7 +73,7 @@ var core = exports.core = {
 		avatar: function (online, user, img) {
 			if (online === true) {
 				if (typeof (img) === typeof ('')) {
-					return '<img src="' + this.avatarurl + '/avatars/' + img + '" max-width="80" max-height="80" align="left">';
+					return '<img src="' + this.avatarurl + '/avatars/' + img + '" class="profile-avatar" align="left">';
 				}
 				return '<img src="http://play.pokemonshowdown.com/sprites/trainers/' + img + '.png" width="80" height="80" align="left">';
 			}
