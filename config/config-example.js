@@ -483,13 +483,20 @@ exports.customavatars = {
 	'blueshrekt': 'blueshrek.gif',
 	'devonrawr': 'devonrawr.gif',
 	'drapionjosi': 'drapionjosi.png',
-	'fairypeak': 'fairypeak.jpg',
+	'fairypeak': 'fairypeak.png',
 	'firegames1212': 'firegames1212.png',
 	'kiritobladekun': 'kiritobladekun.gif',
 	'mindnight': 'mindnight.gif',
 	'sarl': 'sarl.png',
 	'soulstryke': 'soulstryke.png',
 	'zucch': 'zucch.png',
+	'darkletenebreux': 'darkletenebreux.gif',
+	'funkiyouonline': 'funkiyouonline.png',
+	'kantio': 'kantio.jpg',
+	'mattsuper': 'mattsuper.gif',
+	'duo1000': 'mattsuper.gif',
+	'siry': 'siry.png',
+	'suglit': 'suglit.png',
 };
 
 // Tournament announcements
