@@ -1131,7 +1131,7 @@ User = (function () {
 			}
 		}
 		this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
-		this.isClanLeader = (this.name.toUpperCase() === 'ANTEMORTEM' || this.name.toUpperCase() === 'BELLоSSоM' || this.name.toUpperCase() === 'CаѕTFоRM' || this.name.toUpperCase() === 'CһаSE' || this.name.toUpperCase() === 'MєGIDO' || this.name.toUpperCase() === 'NABOORU' || this.name.toUpperCase() === 'OMICRοN' || this.name.toUpperCase() === 'OMICRONHUH' || this.name.toUpperCase() === 'PAPA ANTI' || this.name.toUpperCase() === 'PRINCESS BOOTY' || this.name.toUpperCase() === 'RABINATOR' || this.name.toUpperCase() === 'RABINOV' || this.name.toUpperCase() === 'RALLYKNOB' || this.name.toUpperCase() === 'WOLF' || this.name.toUpperCase() === 'ZEKROM52');
+		this.isClanLeader = (this.name.toUpperCase() === 'SαMUS αRαN' || this.name.toUpperCase() === 'ANTEMORTEM' || this.name.toUpperCase() === 'BELLоSSоM' || this.name.toUpperCase() === 'CаѕTFоRM' || this.name.toUpperCase() === 'CһаSE' || this.name.toUpperCase() === 'MєGIDO' || this.name.toUpperCase() === 'NABOORU' || this.name.toUpperCase() === 'OMICRοN' || this.name.toUpperCase() === 'OMICRONHUH' || this.name.toUpperCase() === 'PAPA ANTI' || this.name.toUpperCase() === 'PRINCESS BOOTY' || this.name.toUpperCase() === 'RABINATOR' || this.name.toUpperCase() === 'RABINOV' || this.name.toUpperCase() === 'RALLYKNOB' || this.name.toUpperCase() === 'WOLF' || this.name.toUpperCase() === 'ZEKROM52');
 		if (this.confirmed) {
 			this.autoconfirmed = this.confirmed;
 			this.locked = false;
@@ -1144,7 +1144,7 @@ User = (function () {
 	User.prototype.setGroup = function (group, forceConfirmed) {
 		this.group = group.charAt(0);
 		this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
-		this.isClanLeader = (this.name.toUpperCase() === 'ANTEMORTEM' || this.name.toUpperCase() === 'BELLоSSоM' || this.name.toUpperCase() === 'CаѕTFоRM' || this.name.toUpperCase() === 'CһаSE' || this.name.toUpperCase() === 'MєGIDO' || this.name.toUpperCase() === 'NABOORU' || this.name.toUpperCase() === 'OMICRοN' || this.name.toUpperCase() === 'OMICRONHUH' || this.name.toUpperCase() === 'PAPA ANTI' || this.name.toUpperCase() === 'PRINCESS BOOTY' || this.name.toUpperCase() === 'RABINATOR' || this.name.toUpperCase() === 'RABINOV' || this.name.toUpperCase() === 'RALLYKNOB' || this.name.toUpperCase() === 'WOLF' || this.name.toUpperCase() === 'ZEKROM52');
+		this.isClanLeader = (this.name.toUpperCase() === 'SαMUS αRαN' || this.name.toUpperCase() === 'ANTEMORTEM' || this.name.toUpperCase() === 'BELLоSSоM' || this.name.toUpperCase() === 'CаѕTFоRM' || this.name.toUpperCase() === 'CһаSE' || this.name.toUpperCase() === 'MєGIDO' || this.name.toUpperCase() === 'NABOORU' || this.name.toUpperCase() === 'OMICRοN' || this.name.toUpperCase() === 'OMICRONHUH' || this.name.toUpperCase() === 'PAPA ANTI' || this.name.toUpperCase() === 'PRINCESS BOOTY' || this.name.toUpperCase() === 'RABINATOR' || this.name.toUpperCase() === 'RABINOV' || this.name.toUpperCase() === 'RALLYKNOB' || this.name.toUpperCase() === 'WOLF' || this.name.toUpperCase() === 'ZEKROM52');
 		if (forceConfirmed || this.group !== Config.groupsranking[0]) {
 			usergroups[this.userid] = this.group + this.name;
 		} else {
