@@ -822,6 +822,17 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		this.sendReply("You are " + (user.isAway ? "now" : "no longer") + " away and blocking challenges.");
 	},
+	ascii: function (target, room, user) {
+		if (!target) return;
+		if (!this.canBroadcast()) return;
+		var oldVersion = target;
+		var newVersion = target;
+		newVersion = newVersion.replace(/[^\x00-\x7F]/g, "");
+		this.sendReplyBox(
+			"Old version: " + oldVersion + "<br />" +
+			"ASCII-only version: " + newVersion
+		);
+	},
 
 	/*********************************************************
 	 * Moderating: Punishments
