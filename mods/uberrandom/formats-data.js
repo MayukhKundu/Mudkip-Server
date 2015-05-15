@@ -47,8 +47,6 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	rayquazamega: {
-		randomBattleMoves: ["vcreate","extremespeed","swordsdance","earthquake","dragonascent","dragonclaw","dragondance"],
-		randomDoubleBattleMoves: ["vcreate","extremespeed","swordsdance","earthquake","dragonascent","dragonclaw","dragondance","protect"],
 		tier: "AG"
 	},
 	lucario: {
