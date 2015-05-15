@@ -216,7 +216,7 @@ exports.parse = {
 		var cmdrMessage = '["' + room + '|' + by + '|' + message + '"]';
 		message = message.trim();
 		// auto accept invitations to rooms
-		if (room.charAt(0) === ',' && message.substr(0,8) === '/invite ' && this.hasRank(by, '%@&~') && !(Config.serverid === 'showdown' && toId(message.substr(8)) === 'lobby')) {
+		if (room.charAt(0) === ',' && message.substr(0,8) === '/invite ' && !(Config.serverid === 'showdown' && toId(message.substr(8)) === 'lobby')) {
 			this.say('', '/join ' + message.substr(8));
 		}
 		if (message.substr(0, Config.commandcharacter.length) !== Config.commandcharacter || toId(by) === toId(Config.nick)) return;
