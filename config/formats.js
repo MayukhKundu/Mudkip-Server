@@ -308,7 +308,7 @@ exports.Formats = [
 		name: "Inverse Random",
 		section: "Random Battles (aka Randbats)",
 
-		team: 'random',
+		team: 'randomNoPotD',
 		ruleset: ['Random (no PotD)'],
 		onModifyPokemon: function (pokemon) {
 			pokemon.negateImmunity['Type'] = true;
