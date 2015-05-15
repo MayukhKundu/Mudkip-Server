@@ -199,7 +199,10 @@ exports.Formats = [
 		section: "SUPER LADDER WEEK",
 
 		team: 'randomCommunity',
-		ruleset: ['Random (no PotD)']
+		ruleset: ['Random (no PotD)'],
+		onBegin: function () {
+			this.add("raw|Would you like to be in Community Random? If so, <a href='http://www.pokecommunity.com/showthread.php?t=335080'>click here</a>");
+		},
 	},
 	{
 		name: "Moonotype (SLW6)",
