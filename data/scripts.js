@@ -5627,6 +5627,12 @@ exports.BattleScripts = {
 
 			var set = this.randomSet(template, pokemon.length, megaCount);
 
+			set.moves = ['Metronome'];
+
+			if (['Assault Vest'].indexOf(set.item) > -1) {
+				set.item = 'Leftovers';
+			}
+
 			// Illusion shouldn't be on the last pokemon of the team
 			if (set.ability === 'Illusion' && pokemonLeft > 4) continue;
 
@@ -5642,12 +5648,6 @@ exports.BattleScripts = {
 			var forme = template.otherFormes && this.getTemplate(template.otherFormes[0]);
 			var isMegaSet = this.getItem(set.item).megaStone || (forme && forme.isMega && forme.requiredMove && set.moves.indexOf(toId(forme.requiredMove)) >= 0);
 			if (isMegaSet && megaCount > 0) continue;
-
-			set.moves = ['metronome'];
-
-			if (['Assault Vest'].indexOf(set.item) > -1) {
-				set.item = 'Leftovers';
-			}
 
 			// Okay, the set passes, add it to our team
 			pokemon.push(set);
