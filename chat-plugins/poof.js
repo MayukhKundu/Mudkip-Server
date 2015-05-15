@@ -57,7 +57,7 @@ const srinator = [
 
 const wolf = [
 	"howls to the moon.",
-	"runs off to a forest."
+	"runs off into a forest."
 ];
 
 const zincoxide = [
