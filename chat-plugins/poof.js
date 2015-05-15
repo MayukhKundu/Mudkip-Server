@@ -35,6 +35,10 @@ const darkshadow6 = [
 	"Never Give Up"
 ];
 
+const f4n = [
+	"evoluciona a Pichu Tipo Hada."
+];
+
 const hannumikkola = [
 	"is stealing your food now."
 ];
@@ -142,6 +146,14 @@ exports.commands = {
 			user.leaveRoom(room);
 		} else if (userid.toUpperCase() === 'DARK SHADOW 6') {
 			var message = target || darkshadow6[Math.floor(Math.random() * darkshadow6.length)];
+
+			room.addRaw(Tools.escapeHTML(message));
+			user.leaveRoom(room);
+		} else if (userid.toUpperCase() === 'F4N') {
+			var message = target || f4n[Math.floor(Math.random() * f4n.length)];
+			if (message.indexOf('{{user}}') < 0)
+				message = '{{user}} ' + message;
+			message = message.replace(/{{user}}/g, user.name);
 
 			room.addRaw(Tools.escapeHTML(message));
 			user.leaveRoom(room);
