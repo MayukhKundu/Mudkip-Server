@@ -469,7 +469,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		}
 	}
 
-	if (tells[user.userid] && user.authenticated) {
+	if (tells[user.userid] && user.registered) {
 		for (var tell in tells[user.userid]) {
 			connection.sendTo(room, tells[user.userid][tell]);
 		};
