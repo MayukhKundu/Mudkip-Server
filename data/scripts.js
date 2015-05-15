@@ -4615,6 +4615,10 @@ exports.BattleScripts = {
 			} else if (template.id === 'suicune') {
 				set.species = 'Suicune';
 				set.name = 'wolf';
+				set.item = 'Leftovers';
+				set.moves = ['Scald', 'Calm Mind', 'Rest', 'Sleep Talk'];
+				set.nature = 'Bold';
+				set.evs = {hp: 252, def: 252, spd: 4, spa: 0, atk: 0, spe: 0};
 			} else if (template.id === 'sylveon') {
 				set.species = 'Sylveon';
 				var dice = this.random(2);
