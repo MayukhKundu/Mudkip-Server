@@ -4136,7 +4136,7 @@ exports.BattleScripts = {
 		var pokemonLeft = 0;
 		var pokemon = [];
 
-		var pokemonPool = ['absol', 'aerodactyl', 'arcanine', 'archeops', 'aromatisse', 'azelf', 'bellossom', 'bidoof', 'blissey', 'castformsunny', 'celebi', 'charizard', 'cofagrigus', 'cradily', 'cresselia', 'crobat', 'cyndaquil', 'darkrai', 'dragonite', 'espurr', 'feraligatr', 'gallade', 'galvantula', 'garchomp', 'gardevoir', 'gengar', 'golurk', 'gourgeist', 'greninja', 'heracross', 'hydreigon', 'igglybuff', 'infernape', 'jynx', 'lapras', 'latias', 'latios', 'liepard', 'ludicolo', 'magikarp', 'magneton', 'magnezone', 'manectric', 'mantine', 'masquerain', 'mawile', 'meganium', 'metagross', 'mew', 'mewtwo', 'milotic', 'mismagius', 'missingno', 'mudkip', 'nidoking', 'oddish', 'oshawott', 'pachirisu', 'pichu', 'pidgey', 'pikachu', 'porygon2', 'pumpkaboo', 'pupitar', 'raichu', 'reshiram', 'reuniclus', 'rhyperior', 'rotomfan', 'sableye', 'sandshrew', 'sceptile', 'scolipede', 'scrafty', 'serperior', 'shaymin', 'skarmory', 'slowbro', 'snivy', 'spheal', 'staraptor', 'starmie', 'suicune', 'sylveon', 'tangela', 'togekiss', 'typhlosion', 'tyranitar', 'vaporeon', 'venusaur', 'victini', 'volcarona', 'vulpix', 'whimsicott', 'wigglytuff', 'zebstrika', 'zekrom'];
+		var pokemonPool = ['absol', 'aerodactyl', 'arcanine', 'archeops', 'aromatisse', 'azelf', 'bellossom', 'bidoof', 'blissey', 'castform', 'celebi', 'charizard', 'chesnaught', 'cofagrigus', 'cradily', 'cresselia', 'crobat', 'cyndaquil', 'darkrai', 'dragonite', 'emboar', 'espurr', 'feraligatr', 'gallade', 'galvantula', 'garchomp', 'gardevoir', 'gengar', 'golurk', 'gourgeist', 'greninja', 'heracross', 'hydreigon', 'igglybuff', 'infernape', 'jellicent', 'jigglypuff', 'jynx', 'lapras', 'latias', 'latios', 'liepard', 'ludicolo', 'magikarp', 'magneton', 'magnezone', 'manectric', 'mantine', 'masquerain', 'mawile', 'meganium', 'metagross', 'metagrossmega', 'mew', 'mewtwo', 'milotic', 'mismagius', 'mudkip', 'nidoking', 'oddish', 'oshawott', 'pachirisu', 'pichu', 'pidgey', 'pikachu', 'porygon2', 'pumpkaboo', 'pupitar', 'raichu', 'reshiram', 'reuniclus', 'rhyperior', 'rotomfan', 'sableye', 'sandshrew', 'sandslash', 'sceptile', 'scolipede', 'scrafty', 'serperior', 'shaymin', 'skarmory', 'slowbro', 'snivy', 'spheal', 'staraptor', 'starmie', 'suicune', 'sylveon', 'tangela', 'togekiss', 'typhlosion', 'tyranitar', 'vaporeon', 'venusaur', 'victini', 'volcarona', 'vulpix', 'whimsicott', 'wigglytuff', 'zebstrika', 'zekrom'];
 
 		var typeCount = {};
 		var typeComboCount = {};
@@ -4282,6 +4282,14 @@ exports.BattleScripts = {
 				} else {
 					set.name = 'Rukario';
 				}
+			} else if (template.id === 'chesnaught') {
+				set.species = 'Chesnaught';
+				set.name = 'gio7sm';
+				set.item = 'Leftovers';
+				set.ability = 'Bulletproof';
+				set.moves = ['Spiky Shield', 'Leech Seed', 'Hammer Arm', 'Spikes'];
+				set.nature = 'Impish';
+				set.evs = {hp: 252, def: 252, spd: 4, spa: 0, atk: 0, spe: 0};
 			} else if (template.id === 'cofagrigus') {
 				set.species = 'cofagrigus';
 				set.name = 'Zeffy';
@@ -4317,6 +4325,12 @@ exports.BattleScripts = {
 			} else if (template.id === 'dragonite') {
 				set.species = 'dragonite';
 				set.name = 'Dark Shadow 6';
+			} else if (template.id === 'emboar') {
+				set.item = 'Choice Scarf';
+				set.ability = 'Reckless';
+				set.moves = ['Head Smash', 'Flare Blitz', 'Wild Charge', 'Superpower'];
+				set.nature = 'Jolly';
+				set.evs = {hp: 4, def: 0, spd: 0, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'espurr') {
 				set.species = 'espurr';
 				set.name = 'machomuu';
@@ -4330,8 +4344,18 @@ exports.BattleScripts = {
 				set.species = 'galvantula';
 				set.name = 'Synerjee';
 			} else if (template.id === 'garchomp') {
-				set.species = 'garchomp';
-				set.name = 'Exile';
+				set.species = 'Garchomp';
+				var dice = this.random(2);
+				if (dice < 1) {
+					set.name = 'Exile';
+				} else {
+					set.name = 'ThePoople';
+					set.item = 'Choice Band';
+					set.ability = 'Rough Skin';
+					set.moves = ['Earthquake', 'Outrage', 'Iron Head', 'Crunch'];
+					set.nature = 'Jolly';
+					set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
+				}
 			} else if (template.id === 'gardevoir') {
 				set.species = 'gardevoir';
 				set.name = 'Jellicent♀';
@@ -4359,6 +4383,22 @@ exports.BattleScripts = {
 			} else if (template.id === 'infernape') {
 				set.species = 'infernape';
 				set.name = 'Nathan';
+			} else if (template.id === 'jellicent') {
+				set.species = 'Jellicent';
+				set.name = '2Fruit';
+				set.item = 'Leftovers';
+				set.ability = 'Water Absorb';
+				set.moves = ['Recover', 'Scald', 'Will-O-Wisp', 'Night Shade'];
+				set.nature = 'Bold';
+				set.evs = {hp: 252, def: 124, spd: 132, spa: 0, atk: 0, spe: 0};
+			} else if (template.id === 'jigglypuff') {
+				set.species = 'Jigglypuff';
+				set.name = 'JatinGupta';
+				set.item = 'Eviolite';
+				set.ability = 'Cute Charm';
+				set.moves = ['Hyper Voice', 'Double-Edge', 'Rollout', 'Body Slam'];
+				set.nature = 'Sassy';
+				set.evs = {hp: 252, def: 0, spd: 0, spa: 252, atk: 4, spe: 0};
 			} else if (template.id === 'jynx') {
 				set.species = 'jynx';
 				set.name = 'mystletainn';
@@ -4409,10 +4449,19 @@ exports.BattleScripts = {
 				set.species = 'meganium';
 				set.name = 'Axeliira';
 			} else if (template.id === 'metagross') {
-				set.species = 'metagross';
+				set.species = 'Metagross';
 				set.name = 'punkysaur';
-				set.moves[0] = 'meteormash';
-				set.moves[1] = 'bulletpunch';
+				set.item = 'Metagrossite';
+				set.moves = ['Meteor Mash', 'Zen Headbutt', 'Ice Punch', 'Earthquake'];
+				set.nature = 'Jolly';
+				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
+			} else if (template.id === 'metagrossmega') {
+				set.species = 'Metagross-Mega';
+				set.name = 'Syndrome';
+				set.item = 'Metagrossite';
+				set.moves = ['Meteor Mash', 'Zen Headbutt', 'Hammer Arm', 'Pursuit'];
+				set.nature = 'Jolly';
+				set.evs = {hp: 0, def: 0, spd: 4, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'mew') {
 				set.species = 'mew';
 				set.name = 'Rϵd';
@@ -4434,14 +4483,6 @@ exports.BattleScripts = {
 				set.moves = ['willowisp', 'hex', 'nastyplot', 'powergem'];
 				set.nature = 'timid';
 				set.evs = {hp: 0, def: 0, spd: 4, spa: 252, atk: 0, spe: 252};
-			} else if (template.id === 'missingno') {
-				set.species = 'missingno';
-				set.name = 'King Syn';
-				set.item = 'lifeorb';
-				set.ability = 'simple';
-				set.moves = ['swordsdance', 'extremespeed', 'zenheadbutt', 'closecombat'];
-				set.nature = 'adamant';
-				set.evs = {hp: 0, def: 4, spd: 0, spa: 0, atk: 252, spe: 252};
 			} else if (template.id === 'mudkip') {
 				set.species = 'mudkip';
 				set.name = 'Bidoof FTW';
@@ -4519,6 +4560,13 @@ exports.BattleScripts = {
 			} else if (template.id === 'sandshrew') {
 				set.species = 'sandshrew';
 				set.name = 'Squirrel';
+			} else if (template.id === 'sandslash') {
+				set.species = 'Sandslash';
+				set.name = 'destinedjagold';
+				set.item = 'Choice Scarf';
+				set.ability = 'Sand Rush';
+				set.moves = ['Earthquake', 'Rock Tomb', 'Poison Jab', 'Chip Away'];
+				set.evs = {hp: 0, def: 0, spd: 252, spa: 0, atk: 252, spe: 4};
 			} else if (template.id === 'sceptile') {
 				set.species = 'sceptile';
 				set.name = 'Regeneration';
