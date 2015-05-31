@@ -128,6 +128,7 @@ var Room = (function () {
 			}
 		}
 		this.bannedUsers[userid] = userid;
+		if (user.autoconfirmed) this.bannedUsers[user.autoconfirmed] = userid;
 		for (var ip in user.ips) {
 			this.bannedIps[ip] = userid;
 		}
@@ -404,7 +405,7 @@ var GlobalRoom = (function () {
 	GlobalRoom.prototype.searchBattle = function (user, formatid) {
 		if (!user.connected) return;
 
-		formatid = toId(formatid);
+		formatid = Tools.getFormat(formatid).id;
 
 		user.prepBattle(formatid, 'search', null, this.finishSearchBattle.bind(this, user, formatid));
 	};

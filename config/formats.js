@@ -49,22 +49,42 @@ exports.Formats = [
 		name: "Ubers",
 		section: "ORAS Singles",
 
-		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod'],
+		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod'],
 		banlist: []
 	},
 	{
 		name: "UU",
 		section: "ORAS Singles",
 
+		searchShow: false,
 		ruleset: ['OU'],
 		banlist: ['OU', 'BL', 'Alakazite', 'Altarianite', 'Diancite', 'Heracronite', 'Galladite', 'Gardevoirite', 'Lopunnite', 'Medichamite',
 			'Metagrossite', 'Pinsirite', 'Drizzle', 'Drought', 'Shadow Tag'
 		]
 	},
 	{
+		name: "UU (suspect test)",
+		section: "ORAS Singles",
+
+		ruleset: ['OU'],
+		banlist: ['OU', 'Alakazite', 'Altarianite', 'Diancite', 'Heracronite', 'Galladite', 'Gardevoirite', 'Lopunnite', 'Medichamite',
+			'Metagrossite', 'Pinsirite', 'Drizzle', 'Drought', 'Shadow Tag', 'Crawdaunt', 'Diggersby', 'Hawlucha', 'Klefki', 'Scolipede',
+			'Smeargle', 'Staraptor', 'Terrakion', 'Thundurus-Therian', 'Togekiss', 'Venomoth', 'Volcarona', 'Weavile', 'Zygarde'
+		]
+	},
+	{
 		name: "RU",
 		section: "ORAS Singles",
 
+		searchShow: false,
+		ruleset: ['UU'],
+		banlist: ['UU', 'BL2', 'Galladite', 'Houndoominite', 'Pidgeotite']
+	},
+	{
+		name: "RU (suspect test)",
+		section: "ORAS Singles",
+
+		challengeShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2', 'Galladite', 'Houndoominite', 'Pidgeotite']
 	},
@@ -72,6 +92,15 @@ exports.Formats = [
 		name: "NU",
 		section: "ORAS Singles",
 
+		searchShow: false,
+		ruleset: ['RU'],
+		banlist: ['RU', 'BL3', 'Cameruptite', 'Glalitite', 'Steelixite']
+	},
+	{
+		name: "NU (suspect test)",
+		section: "ORAS Singles",
+
+		challengeShow: false,
 		ruleset: ['RU'],
 		banlist: ['RU', 'BL3', 'Cameruptite', 'Glalitite', 'Steelixite']
 	},
@@ -121,24 +150,8 @@ exports.Formats = [
 		name: "Battle Spot Special 10",
 		section: "ORAS Singles",
 
+		maxForcedLevel: 50,
 		ruleset: ['Battle Spot Singles'],
-		onModifyPokemon: function (pokemon) {
-			pokemon.negateImmunity['Type'] = true;
-		},
-		onEffectiveness: function (typeMod, target, type, move) {
-			// The effectiveness of Freeze Dry on Water isn't reverted
-			if (move && move.id === 'freezedry' && type === 'Water') return;
-			if (move && !this.getImmunity(move, type)) return 1;
-			return -typeMod;
-		}
-	},
-	{
-		name: "[PGL] Little Cup",
-		section: "ORAS Singles",
-
-		maxForcedLevel: 5,
-		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview GBU', 'Little Cup'],
-		banlist: ['Eviolite', 'Dragon Rage', 'Sonic Boom'],
 		requirePentagon: true,
 		validateTeam: function (team, format) {
 			if (team.length < 3) return ['You must bring at least three Pokémon.'];
@@ -149,6 +162,15 @@ exports.Formats = [
 			this.p1.pokemonLeft = this.p1.pokemon.length;
 			this.p2.pokemon = this.p2.pokemon.slice(0, 3);
 			this.p2.pokemonLeft = this.p2.pokemon.length;
+		},
+		onModifyPokemon: function (pokemon) {
+			pokemon.negateImmunity['Type'] = true;
+		},
+		onEffectiveness: function (typeMod, target, type, move) {
+			// The effectiveness of Freeze Dry on Water isn't reverted
+			if (move && move.id === 'freezedry' && type === 'Water') return;
+			if (move && !this.getImmunity(move, type)) return 1;
+			return -typeMod;
 		}
 	},
 	{
@@ -708,9 +730,21 @@ exports.Formats = [
 		section: "ORAS Doubles",
 
 		gameType: 'doubles',
+		searchShow: false,
 		ruleset: ['Pokemon', 'Standard Doubles', 'Team Preview'],
 		banlist: ['Arceus', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo',
 			'Palkia', 'Rayquaza', 'Reshiram', 'Xerneas', 'Yveltal', 'Zekrom', 'Salamencite', 'Soul Dew', 'Dark Void',
+			'Gravity ++ Grass Whistle', 'Gravity ++ Hypnosis', 'Gravity ++ Lovely Kiss', 'Gravity ++ Sing', 'Gravity ++ Sleep Powder', 'Gravity ++ Spore'
+		]
+	},
+	{
+		name: "Doubles OU (suspect test)",
+		section: "ORAS Doubles",
+
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Standard Doubles', 'Team Preview'],
+		banlist: ['Arceus', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo',
+			'Palkia', 'Rayquaza', 'Reshiram', 'Xerneas', 'Yveltal', 'Zekrom', 'Soul Dew', 'Dark Void',
 			'Gravity ++ Grass Whistle', 'Gravity ++ Hypnosis', 'Gravity ++ Lovely Kiss', 'Gravity ++ Sing', 'Gravity ++ Sleep Powder', 'Gravity ++ Spore'
 		]
 	},
@@ -832,21 +866,26 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "2v2 Doubles",
+		name: "Linked",
 		section: "OM of the Month",
 		column: 2,
 
-		gameType: 'doubles',
-		ruleset: ['Doubles OU'],
-		banlist: ['Perish Song'],
-		validateTeam: function (team, format) {
-			if (team.length > 4) return ['You may only bring up to four Pokémon.'];
-		},
-		onBegin: function () {
-			this.p1.pokemon = this.p1.pokemon.slice(0, 2);
-			this.p1.pokemonLeft = this.p1.pokemon.length;
-			this.p2.pokemon = this.p2.pokemon.slice(0, 2);
-			this.p2.pokemonLeft = this.p2.pokemon.length;
+		mod: 'linked',
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: ['Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Defense', 'Deoxys-Speed',
+			'Dialga', 'Genesect', 'Gengar-Mega', 'Giratina', 'Giratina-Origin', 'Greninja', 'Groudon', 'Ho-Oh', 'Kangaskhan-Mega',
+			'Kyogre', 'Kyurem-White', 'Lucario-Mega', 'Lugia', 'Mawile-Mega', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram',
+			'Salamence-Mega', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom',
+			'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'
+		],
+		validateSet: function (set) {
+			if (set.moves && set.moves.length >= 2) {
+				var moves = [toId(set.moves[0]), toId(set.moves[1])];
+				if (moves.indexOf('superfang') < 0) return;
+				if (moves.indexOf('seismictoss') >= 0 || moves.indexOf('nightshade') >= 0) {
+					return ["Linking Super Fang with Seismic Toss or Night Shade is banned"];
+				}
+			}
 		}
 	},
 	{
@@ -1035,9 +1074,10 @@ exports.Formats = [
 
 		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Team Preview'],
 		banlist: ['Ignore STAB Moves', 'Arceus', 'Blaziken', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Diggersby', 'Genesect', 'Giratina', 'Giratina-Origin',
-			'Groudon', 'Ho-Oh', 'Keldeo', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Porygon-Z', 'Rayquaza',
-			'Reshiram', 'Shaymin-Sky', 'Sylveon', 'Xerneas', 'Yveltal', 'Zekrom', 'Aerodactylite', 'Altarianite', 'Gengarite', 'Kangaskhanite',
-			"King's Rock", 'Lopunnite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Razor Fang', 'Salamencite', 'Slowbronite', 'Soul Dew'
+			'Greninja', 'Groudon', 'Ho-Oh', 'Keldeo', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia',
+			'Porygon-Z', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Sylveon', 'Xerneas', 'Yveltal', 'Zekrom', 'Aerodactylite', 'Altarianite',
+			'Gengarite', 'Kangaskhanite', "King's Rock", 'Lopunnite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Razor Fang', 'Salamencite', 'Slowbronite',
+			'Soul Dew'
 		]
 	},
 	{
@@ -1063,46 +1103,6 @@ exports.Formats = [
 			'DeepSeaScale', 'DeepSeaTooth', 'Eviolite', 'Gengarite', 'Kangaskhanite', 'Light Ball', 'Mawilite', 'Medichamite', 'Soul Dew', 'Thick Club',
 			'Arena Trap', 'Huge Power', 'Pure Power', 'Shadow Tag'
 		]
-	},
-	{
-		name: "Classic Hackmons",
-		section: "Other Metagames",
-
-		searchShow: false,
-		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
-		validateSet: function (set) {
-			var template = this.getTemplate(set.species);
-			var item = this.getItem(set.item);
-			var problems = [];
-
-			if (set.species === set.name) delete set.name;
-			if (template.isNonstandard) {
-				problems.push(set.species + ' is not a real Pokemon.');
-			}
-			if (item.isNonstandard) {
-				problems.push(item.name + ' is not a real item.');
-			}
-			var ability = {};
-			if (set.ability) ability = this.getAbility(set.ability);
-			if (ability.isNonstandard) {
-				problems.push(ability.name + ' is not a real ability.');
-			}
-			if (set.moves) {
-				for (var i = 0; i < set.moves.length; i++) {
-					var move = this.getMove(set.moves[i]);
-					if (move.isNonstandard) {
-						problems.push(move.name + ' is not a real move.');
-					}
-				}
-				if (set.moves.length > 4) {
-					problems.push((set.name || set.species) + ' has more than four moves.');
-				}
-			}
-			if (set.level && set.level > 100) {
-				problems.push((set.name || set.species) + ' is higher than level 100.');
-			}
-			return problems;
-		}
 	},
 	{
 		name: "Hidden Type",
