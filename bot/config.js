@@ -4,7 +4,7 @@
 // If you really don't know how to do this... Run `node getserver.js URL`.
 // Fill in the URL of the client where `URL` is.
 // For example: `node getserver.js http://example-server.psim.us/`
-exports.server = 'cbc.pokecommunity.com';
+exports.server = 'server-mudkipguy.rhcloud.com';
 exports.port = 8000;
 
 // This is the server id.
@@ -13,7 +13,7 @@ exports.port = 8000;
 // For example, on the Smogon server, it will say somewhere in the URL
 // ~~showdown, meaning that the server id is 'showdown'.
 // If you really don't know how to check this... run the said script above.
-exports.serverid = 'pokecommunity';
+exports.serverid = 'server-mudkipguy.rhcloud.com';
 
 // The nick and password to log in with
 // If no password is required, leave pass empty
@@ -59,20 +59,20 @@ exports.debuglevel = 3;
 
 // Users who can use all commands regardless of their rank. Be very cautious
 // with this, especially on servers other than main.
-exports.excepts = ['wolf'];
+exports.excepts = ['mudkipguy'];
 
 // Whitelisted users are those who the bot will not enforce moderation for.
-exports.whitelist = ['PokeCommBot'];
+exports.whitelist = ['PokeCommBot','mudkipguy'];
 
 // Users in this list can use the regex autoban commands. Only add users who know how to write regular expressions and have your complete trust not to abuse the commands.
 exports.regexautobanwhitelist = [];
 
 // Add a link to the help for the bot here. When there is a link here, .help and .guide
 // will link to it.
-exports.botguide = 'http://www.pokecommunity.com/showthread.php?t=289012#botguide';
+exports.botguide = 'Will be uploaded soon!';
 
 // Add a link to the git repository for the bot here for .git to link to.
-exports.fork = 'https://github.com/awolffromspace/PC-Battle-Server-Bot';
+exports.fork = 'Will be updated soon!';
 
 // This allows the bot to act as an automated moderator. If enabled, the bot will
 // mute users who send 6 lines or more in 6 or fewer seconds for 7 minutes. NOTE: THIS IS
