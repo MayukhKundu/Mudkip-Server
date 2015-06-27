@@ -255,9 +255,7 @@ exports.grouplist = [
 		roommod: true,
 		roomdriver: true,
 		roomsubdriver: true,
-		roomonly: true,
 		tournamentsmanagement: true,
-		rmall: true
 	},
 	{
 		symbol: '-',
